@@ -1,0 +1,9 @@
+{
+  "name": "easyAccess-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/easyAccess-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["easyAccess"],
+  "// targets": "to see all targets run: nx show project easyAccess-e2e --web",
+  "targets": {}
+}
