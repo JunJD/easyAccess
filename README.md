@@ -1,82 +1,85 @@
+```markdown
 # EasyAccess
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+✨ 您的新鲜、闪亮的 [Nx 工作区](https://nx.dev) 几乎准备好了 ✨。
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+[了解更多关于此工作区设置及其功能的信息](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) 或运行 `npx nx graph` 以可视化地探索所创建的内容。现在，让我们开始吧！
 
-## Finish your CI setup
+## 完成您的 CI 设置
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/UYvR07Wgz5)
+[点击此处完成工作区设置！](https://cloud.nx.app/connect/UYvR07Wgz5)
 
 
-## Run tasks
+## 运行任务
 
-To run the dev server for your app, use:
+要为您的应用运行开发服务器，请使用：
 
 ```sh
 npx nx dev easyAccess
 ```
 
-To create a production bundle:
+要创建生产包：
 
 ```sh
 npx nx build easyAccess
 ```
 
-To see all available targets to run for a project, run:
+要查看为项目可运行的所有目标，请运行：
 
 ```sh
 npx nx show project easyAccess
 ```
         
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+这些目标要么是[自动推断](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)的，要么在 `project.json` 或 `package.json` 文件中定义。
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+[更多关于运行任务的文档 &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-## Add new projects
+## 添加新项目
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+虽然您可以手动向工作区添加新项目，但您可能希望利用 [Nx 插件](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)及其[代码生成](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)功能。
 
-Use the plugin's generator to create new projects.
+使用插件的生成器来创建新项目。
 
-To generate a new application, use:
+要生成新应用，请使用：
 
 ```sh
 npx nx g @nx/next:app demo
 ```
 
-To generate a new library, use:
+要生成新库，请使用：
 
 ```sh
 npx nx g @nx/react:lib mylib
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+您可以使用 `npx nx list` 获取已安装插件的列表。然后，运行 `npx nx list <plugin-name>` 来了解特定插件的更多功能。或者，[安装 Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) 以在 IDE 中浏览插件和生成器。
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+[了解更多关于 Nx 插件 &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [浏览插件注册表 &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+[了解更多关于 CI 上的 Nx](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-## Install Nx Console
+## 安装 Nx Console
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+Nx Console 是一个编辑器扩展，它丰富您的开发体验。它让您可以运行任务、生成代码，并在 IDE 中改进代码自动完成。它适用于 VSCode 和 IntelliJ。
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+[安装 Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-## Useful links
+## 有用的链接
 
-Learn more:
+了解更多：
 
-- [Learn more about this workspace setup](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [了解更多关于此工作区设置](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
+- [了解 CI 上的 Nx](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [使用 Nx release 发布包](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [什么是 Nx 插件？](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-And join the Nx community:
+并加入 Nx 社区：
 - [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [在 X 上关注我们](https://twitter.com/nxdevtools) 或 [LinkedIn](https://www.linkedin.com/company/nrwl)
+- [我们的 Youtube 频道](https://www.youtube.com/@nxdevtools)
+- [我们的博客](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+```

@@ -44,7 +44,19 @@
       }
     }
   ],
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "cacheDirectory": "/tmp/nx-cache"
+      }
+    }
+  },
   "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"]
+    },
     "e2e-ci--**/*": {
       "dependsOn": ["^build"]
     }
@@ -56,5 +68,6 @@
         "linter": "eslint"
       }
     }
-  }
+  },
+  "defaultProject": "easyAccess"
 }
