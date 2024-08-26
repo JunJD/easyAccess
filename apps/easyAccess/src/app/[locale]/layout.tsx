@@ -25,8 +25,8 @@ const space_grotesk = Space_Grotesk({
   variable: '--font-space-grotesk'
 })
 export const metadata: Metadata = {
-  title: 'Next Temp',
-  description: 'create next app By Yahya Parvar!'
+  title: '待定 title',
+  description: '待定 description!'
 }
 
 export default function RootLayout({
