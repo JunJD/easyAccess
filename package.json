@@ -9,14 +9,24 @@
   },
   "private": true,
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.7",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-separator": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.3.30",
     "next": "14.2.3",
     "next-intl": "^3.17.6",
     "next-themes": "^0.3.0",
     "nextjs-toploader": "^1.6.12",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "use-keyboard-shortcut": "^1.1.6",
+    "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
     "@nx/devkit": "19.6.2",
