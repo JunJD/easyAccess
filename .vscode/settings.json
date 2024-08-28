@@ -3,6 +3,7 @@
         "cacheable",
         "clsx",
         "toploader",
-        "usehooks"
+        "usehooks",
+        "zustand"
     ]
 }

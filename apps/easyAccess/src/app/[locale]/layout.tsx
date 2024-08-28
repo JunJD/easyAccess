@@ -11,7 +11,6 @@ import NextTopLoader from 'nextjs-toploader'
 import './globals.css'
 import { ThemeProvider } from './provider/ThemeProvider'
 
-
 const inter = Inter({
   subsets: ['latin'],
   variable: '--inter'
@@ -41,7 +40,7 @@ export default function RootLayout({
     <html
       lang={locale}
       dir={locale === 'ar' || locale == 'fa' ? 'rtl' : 'ltr'}
-      className={`${space_grotesk.variable} ${rubik.variable} scroll-smooth`}
+      className={`${space_grotesk.variable} ${rubik.variable} ${inter.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <body>

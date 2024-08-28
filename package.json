@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx start",
+    "dev": "nx dev",
     "build": "nx build",
     "test": "nx test"
   },
@@ -13,9 +14,11 @@
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@types/lodash-es": "^4.17.12",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.30",
+    "lodash-es": "^4.17.21",
     "next": "14.2.3",
     "next-intl": "^3.17.6",
     "next-themes": "^0.3.0",
@@ -26,7 +29,9 @@
     "tailwindcss-animate": "^1.0.7",
     "tslib": "^2.3.0",
     "use-keyboard-shortcut": "^1.1.6",
-    "usehooks-ts": "^3.1.0"
+    "usehooks-ts": "^3.1.0",
+    "utility-types": "^3.11.0",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@nx/devkit": "19.6.2",
