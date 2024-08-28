@@ -4,9 +4,8 @@ import { SidebarSimple } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Sidebar } from "./_components/Sidebar";
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from "apps/easyAccess/libs/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "apps/easyAccess/libs/ui/sheet";
 import { Button } from "apps/easyAccess/libs/ui/Button";
-
 
 const DashboardLayout = ({
   children,
@@ -25,7 +24,8 @@ const DashboardLayout = ({
             </Button>
           </SheetTrigger>
 
-          <SheetContent showClose={false} side="left" className="focus-visible:outline-none">
+          <SheetContent aria-describedby={undefined} showClose={false} side="left" className="focus-visible:outline-none">
+            <SheetTitle className="hidden" />
             <SheetClose asChild className="absolute left-4 top-4">
               <Button size="icon" variant="ghost">
                 <SidebarSimple />
@@ -38,9 +38,9 @@ const DashboardLayout = ({
       </div>
 
       <motion.div
-        initial={{ x: -320 }}
+        initial={{ x: -220 }}
         animate={{ x: 0 }}
-        className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-[320px] lg:flex-col"
+        className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-[220px] lg:flex-col bg-info"
       >
         <div className="h-full rounded p-4">
           <Sidebar />

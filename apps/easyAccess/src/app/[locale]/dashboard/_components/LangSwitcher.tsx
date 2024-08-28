@@ -26,7 +26,7 @@ const LangSwitcher: React.FC = () => {
         <div className='flex items-center justify-center'>
             <div className='relative'>
                 <Button
-                    className='text-destructive inline-flex w-full items-center justify-between gap-3'
+                    className='bg-background text-destructive inline-flex w-full items-center justify-between gap-3'
                     size='sm'
                     onClick={() => setIsOptionsExpanded(!isOptionsExpanded)}
                     onBlur={() => setIsOptionsExpanded(false)}
@@ -53,7 +53,7 @@ const LangSwitcher: React.FC = () => {
                                             onMouseDown={e => {
                                                 e.preventDefault()
                                             }}
-                                            className={`block w-full px-4 py-2 text-left text-sm hover:bg-dropdownHover ${pathname === `/${lang.code}`
+                                            className={`bg-background block w-full px-4 py-2 text-left text-sm hover:bg-dropdownHover ${pathname === `/${lang.code}`
                                                 ? 'bg-selected text-primary hover:bg-selected'
                                                 : 'text-secondary'
                                                 }`}
