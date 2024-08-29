@@ -3,7 +3,7 @@ import { SidebarSimple } from "@phosphor-icons/react";
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Sidebar } from "./_components/Sidebar";
+import { Sidebar } from "../_components/Sidebar";
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "apps/easyAccess/libs/ui/sheet";
 import { Button } from "apps/easyAccess/libs/ui/Button";
 
@@ -40,7 +40,7 @@ const DashboardLayout = ({
       <motion.div
         initial={{ x: -220 }}
         animate={{ x: 0 }}
-        className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-[220px] lg:flex-col bg-info"
+        className="background-secondary hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-[220px] lg:flex-col bg-info"
       >
         <div className="h-full rounded p-4">
           <Sidebar />

@@ -9,8 +9,9 @@ export const localePrefix = 'always'
 
 export const pathnames = {
     '/': '/',
-    '/about': '/about'
-} satisfies Pathnames<typeof locales>
+    '/resumes': '/resumes'
+    // } satisfies Pathnames<typeof locales>
+} as Pathnames<typeof locales>
 
 export const { Link, redirect, usePathname, useRouter, getPathname } =
     createLocalizedPathnamesNavigation({ locales, localePrefix, pathnames })

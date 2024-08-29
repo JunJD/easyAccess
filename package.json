@@ -12,8 +12,12 @@
   "dependencies": {
     "@phosphor-icons/react": "^2.1.7",
     "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-scroll-area": "^1.1.0",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@tiptap/extension-document": "^2.6.6",
+    "@tiptap/pm": "^2.6.6",
+    "@tiptap/react": "^2.6.6",
     "@types/lodash-es": "^4.17.12",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

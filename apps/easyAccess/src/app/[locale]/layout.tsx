@@ -5,20 +5,12 @@ import {
   NextIntlClientProvider,
   useMessages
 } from 'next-intl'
-import { Inter, Rubik, Space_Grotesk } from 'next/font/google'
+import { Space_Grotesk } from 'next/font/google'
 import NextTopLoader from 'nextjs-toploader'
 
 import './globals.css'
 import { ThemeProvider } from './provider/ThemeProvider'
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--inter'
-})
-const rubik = Rubik({
-  subsets: ['arabic'],
-  variable: '--rubik'
-})
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space-grotesk'
@@ -40,7 +32,7 @@ export default function RootLayout({
     <html
       lang={locale}
       dir={locale === 'ar' || locale == 'fa' ? 'rtl' : 'ltr'}
-      className={`${space_grotesk.variable} ${rubik.variable} ${inter.variable} scroll-smooth`}
+      className={`${space_grotesk.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <body>
@@ -74,7 +66,7 @@ export default function RootLayout({
               color='var(--primary)'
               showSpinner={false}
             />
-            <main className='mx-auto max-w-screen-2xl'>{children}</main>
+            <main className='mx-auto w-full'>{children}</main>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

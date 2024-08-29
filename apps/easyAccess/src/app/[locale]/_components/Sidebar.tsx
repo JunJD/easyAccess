@@ -5,10 +5,11 @@ import { Icon } from "apps/easyAccess/components/Icon";
 import { Button } from "apps/easyAccess/libs/ui/Button";
 import { Separator } from "apps/easyAccess/libs/ui/Separator";
 import { KeyboardShortcut } from "apps/easyAccess/libs/ui/shortcut";
+import { Link, useRouter } from "apps/easyAccess/src/navigation";
 // import { Button, KeyboardShortcut, Separator } from "@reactive-resume/ui";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+
 import { usePathname } from "next/navigation";
 
 import useKeyboardShortcut from "use-keyboard-shortcut";
@@ -71,25 +72,27 @@ export const Sidebar = ({ setOpen }: SidebarProps) => {
     //   const { user } = useUser();
     //   const navigate = useNavigate();
 
+    const router = useRouter()
+    
     useKeyboardShortcut(["shift", "r"], () => {
-        // navigate("/dashboard/resumes");
+        router.push("/resumes")
         setOpen?.(false);
     });
-
+    
     useKeyboardShortcut(["shift", "s"], () => {
-        // navigate("/dashboard/settings");
+        router.push("/resumes")
         setOpen?.(false);
     });
 
     const sidebarItems: SidebarItem[] = [
         {
-            path: "/dashboard/resumes",
+            path: "/resumes",
             name: `Resumes`,
             shortcut: "⇧R",
             icon: <ReadCvLogo />,
         },
         {
-            path: "/dashboard/settings",
+            path: "/settings",
             name: `Settings`,
             shortcut: "⇧S",
             icon: <FadersHorizontal />,
