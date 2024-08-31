@@ -16,6 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@easy-access/hooks": ["hooks/src/index.ts"],
+      "@easy-access/resemu-editor": ["resemu-editor/src/index.ts"],
+      "@easy-access/resume-editor": ["resume-editor/src/index.ts"],
       "@easy-access/utils": ["utils/src/index.ts"]
     }
   },

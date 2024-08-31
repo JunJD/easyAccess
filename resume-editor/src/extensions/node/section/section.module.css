@@ -1,0 +1,70 @@
+.root {
+  @apply flex justify-center max-w-full;
+}
+
+.container { 
+  @apply p-2 relative;
+
+  &:hover:not(.focused) {
+    /*box-shadow: rgb(33 33 33 / 80%) 0px 0px 1px 2px, rgb(33 33 33 / 50%) 0px 0px 0px 5000px;*/
+    @apply outline-dotted outline-blue-200 outline-1;
+    & > .bottomControls .topControls {
+      @apply z-0;
+    }
+  }
+}
+
+.focused {
+  @apply outline outline-blue-400 outline-1;
+}
+
+.bottomControls{
+  @apply absolute flex justify-center -mb-4 opacity-0 left-0 w-full transition-opacity;
+
+  &:hover {
+    @apply opacity-100;
+  }
+}
+
+.topControls{
+  @apply absolute flex justify-between -mt-6 pb-4 opacity-0 left-0 w-full transition-opacity;
+
+  &:hover {
+    @apply opacity-100;
+  }
+
+  &:not(:first-child) {
+    @apply hidden;
+  }
+}
+
+
+.insertSectionButton {
+  @apply text-sm px-1 rounded-sm transition-all flex justify-self-center;
+
+  /* &:hover {
+    @apply bg-info;
+  } */
+}
+
+.controlButton {
+  @apply w-5 h-5 rounded-md flex justify-center items-center;
+  /* &:hover {
+    @apply bg-accent-2;
+  } */
+}
+
+.dragHandle {
+  @apply -ml-2;
+  flex: 0 0 auto;
+  position: relative;
+  cursor: grab;
+}
+
+.closeIcon {
+  @apply -mr-2;
+}
+
+.noSelect {
+  @apply select-none;
+}

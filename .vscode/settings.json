@@ -3,7 +3,9 @@
         "cacheable",
         "clsx",
         "grotesk",
+        "interactjs",
         "rhyhorn",
+        "tiptap",
         "toploader",
         "usehooks",
         "zustand"
