@@ -62,6 +62,9 @@ dependencies:
   '@tiptap/extension-text':
     specifier: ^2.6.6
     version: 2.6.6(@tiptap/core@2.6.6)
+  '@tiptap/extension-text-align':
+    specifier: ^2.6.6
+    version: 2.6.6(@tiptap/core@2.6.6)
   '@tiptap/extension-text-style':
     specifier: ^2.6.6
     version: 2.6.6(@tiptap/core@2.6.6)
@@ -77,6 +80,9 @@ dependencies:
   '@tiptap/starter-kit':
     specifier: ^2.6.6
     version: 2.6.6
+  '@tiptap/suggestion':
+    specifier: ^2.6.6
+    version: 2.6.6(@tiptap/core@2.6.6)(@tiptap/pm@2.6.6)
   '@types/lodash-es':
     specifier: ^4.17.12
     version: 4.17.12
@@ -131,6 +137,9 @@ dependencies:
   tailwindcss-animate:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.4.3)
+  tippy.js:
+    specifier: ^6.3.7
+    version: 6.3.7
   tslib:
     specifier: ^2.3.0
     version: 2.7.0
@@ -5030,6 +5039,14 @@ packages:
       '@tiptap/core': 2.6.6(@tiptap/pm@2.6.6)
     dev: false
 
+  /@tiptap/extension-text-align@2.6.6(@tiptap/core@2.6.6):
+    resolution: {integrity: sha512-WdyxULEEHfI3hRDHAFOUoeP84h9myabadfjtZrub7/zO2PKKPAZLBN2vWat5PowH8E8GYX8vqKr9vaX+slfh5g==}
+    peerDependencies:
+      '@tiptap/core': ^2.6.6
+    dependencies:
+      '@tiptap/core': 2.6.6(@tiptap/pm@2.6.6)
+    dev: false
+
   /@tiptap/extension-text-style@2.6.6(@tiptap/core@2.6.6):
     resolution: {integrity: sha512-8fO8m0/QI+rFKgZLP28GG2Nz0zhYsYd76O2Y+HsDTmMypJl/cdiNcVOWWffAwXAfMN43BNX7b1VI1XwGAMgYlg==}
     peerDependencies:
@@ -5117,6 +5134,16 @@ packages:
       '@tiptap/extension-paragraph': 2.6.6(@tiptap/core@2.6.6)
       '@tiptap/extension-strike': 2.6.6(@tiptap/core@2.6.6)
       '@tiptap/extension-text': 2.6.6(@tiptap/core@2.6.6)
+      '@tiptap/pm': 2.6.6
+    dev: false
+
+  /@tiptap/suggestion@2.6.6(@tiptap/core@2.6.6)(@tiptap/pm@2.6.6):
+    resolution: {integrity: sha512-jogG0QgGit9UtTznVnhQfNImZfQM89NR0is20yRQzC0HmD8B8f3jmGrotG63Why2oKbeoe3CpM5/5eDE/paqCA==}
+    peerDependencies:
+      '@tiptap/core': ^2.6.6
+      '@tiptap/pm': ^2.6.6
+    dependencies:
+      '@tiptap/core': 2.6.6(@tiptap/pm@2.6.6)
       '@tiptap/pm': 2.6.6
     dev: false
 

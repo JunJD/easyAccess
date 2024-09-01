@@ -159,4 +159,10 @@ export const ColumnBlock = Node.create<ColumnBlockOptions>({
       setColumns,
     };
   },
+  
+  addAttributes() {
+    return {
+      class: 'w-full grid-flow-col auto-cols-fr gap-6'
+    }
+  }
 });

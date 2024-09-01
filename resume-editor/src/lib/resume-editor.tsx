@@ -3,6 +3,7 @@ import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from "@tiptap/starter-kit"
 import Document from '@tiptap/extension-document'
 import Typography from "@tiptap/extension-typography"
+import { TextAlign } from '@tiptap/extension-text-align'
 import { useEffect } from 'react'
 import { Paragraph } from '@tiptap/extension-paragraph'
 import { TiptapToolbar } from './ToolBar'
@@ -12,6 +13,8 @@ import { SpacerNode } from "@easy-access/spacer-extension"
 import Focus from '@tiptap/extension-focus'
 import './index.css'
 import { ResumeTextStyle } from '@easy-access/text-extensions'
+import { Column, ColumnBlock } from '@easy-access/column-extension'
+import { Command, suggestion } from '@easy-access/commands-extension'
 interface Props {
   content: string | undefined;
   preview: boolean
@@ -25,6 +28,7 @@ export const ResumeEditor = ({
       Document,
       StarterKit.configure({ paragraph: false, heading: false, document: false }),
       Paragraph.extend({
+        // content: '(columnBlock)*',
         draggable: true,
         addKeyboardShortcuts: () => ({
           "mod-a": ({ editor }) => {
@@ -38,6 +42,8 @@ export const ResumeEditor = ({
         }
       }),
       Text,
+      Column,
+      ColumnBlock,
       ResumeTextStyle,
       Color.configure({
         types: ['textStyle'],
@@ -47,6 +53,16 @@ export const ResumeEditor = ({
         mode: "deepest"
       }),
       SpacerNode,
+      Command.configure({
+        HTMLAttributes: {
+          class: 'command'
+        },
+        suggestion
+      }),
+      TextAlign.configure({
+        types: ['paragraph'],
+        defaultAlignment: 'left'
+      }),
       Typography,
     ],
     immediatelyRender: false,

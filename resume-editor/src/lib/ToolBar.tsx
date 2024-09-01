@@ -1,8 +1,9 @@
 import { type Editor } from "@tiptap/react";
 
 import { TextB, TextStrikethrough, TextItalic, Minus, ListNumbers, List, ColumnsPlusRight } from "@phosphor-icons/react";
-import { MdFormatSize, MdFormatLineSpacing } from 'react-icons/md'
+import { MdFormatSize, MdFormatLineSpacing, MdFormatAlignLeft, MdFormatAlignCenter, MdFormatAlignRight } from 'react-icons/md'
 import { Toggle } from "../components/Toggle";
+import { cn } from "@easy-access/utils";
 
 
 type Props = {
@@ -87,6 +88,24 @@ export function TiptapToolbar({ editor }: Props) {
             <option value={4.0}>4.0rem</option>
           </select>
         </div>
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setTextAlign('left').run()}
+        className={cn(editor.isActive('left') ? "bg-accent-3" : '', "border-r px-2 py-1 last:border-none text-accent-6 hover:bg-accent-2")}
+      >
+        <MdFormatAlignLeft />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setTextAlign('center').run()}
+        className={cn(editor.isActive('center') ? "bg-accent-3" : '', "border-r px-2 py-1 last:border-none text-accent-6 hover:bg-accent-2")}
+      >
+        <MdFormatAlignCenter />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setTextAlign('right').run()}
+        className={cn(editor.isActive('right') ? "bg-accent-3" : '', "border-r px-2 py-1 last:border-none text-accent-6 hover:bg-accent-2")}
+      >
+        <MdFormatAlignRight />
       </button>
     </div>
   );

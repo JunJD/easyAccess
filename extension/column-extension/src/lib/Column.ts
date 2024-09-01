@@ -11,4 +11,10 @@ export const Column = Node.create({
     const attrs = mergeAttributes(HTMLAttributes, { class: 'column' });
     return ['div', attrs, 0];
   },
+
+  addAttributes() {
+    return {
+      class: 'overflow-auto border-dashed border-gray-700 rounded-lg'
+    }
+  }
 });

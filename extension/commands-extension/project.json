@@ -1,0 +1,9 @@
+{
+  "name": "commands-extension",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "extension/commands-extension/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project commands-extension --web",
+  "targets": {}
+}
