@@ -1,12 +1,15 @@
 import type { Config } from 'tailwindcss'
+import { join } from 'path';
+import { createGlobPatternsForDependencies } from '@nx/react/tailwind';
 
 const config = {
   darkMode: ['class'],
   content: [
-    './libs/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}'
+    join(
+      __dirname,
+      '{libs,src,components,app}/**/*!(*.stories|*.spec).{ts,tsx,html}'
+    ),
+    ...createGlobPatternsForDependencies(__dirname),
   ],
   prefix: '',
   theme: {
@@ -22,14 +25,13 @@ const config = {
         'span-bg': 'var(--span-bg)'
       },
       colors: {
-        background: 'var(--background)',
+        white2: 'var(--white)',
         primary: {
           DEFAULT: 'var(--primary)'
         },
         'button-secondary': 'var(--button-secondary)',
         'button-text': 'var(--button-text)',
         'text-secondary': 'var(--text-secondary)',
-        'background-secondary': 'var(--background-secondary)',
         secondary: 'var(--secondary)',
         button: 'var(--button)',
         selected: 'var(--selected)',
@@ -37,6 +39,12 @@ const config = {
         dropdownHover: 'var(--dropdown-hover)',
         buttonSecondary: 'var(--button-secondary)'
       },
+
+      backgroundColor: ({theme}) => ({
+        ...theme('colors'),
+        secondary: 'var(--bg-secondary)',
+        background: 'var(--background)',
+      }),
 
       fontFamily: {
         sans: ['var(--font-space-grotesk)', 'var(--rubik)']
