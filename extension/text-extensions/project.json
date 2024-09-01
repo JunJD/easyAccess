@@ -1,0 +1,9 @@
+{
+  "name": "text-extensions",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "extension/text-extensions/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project text-extensions --web",
+  "targets": {}
+}

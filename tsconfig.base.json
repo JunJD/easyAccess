@@ -20,8 +20,14 @@
       ],
       "@easy-access/hooks": ["hooks/src/index.ts"],
       "@easy-access/resume-editor": ["resume-editor/src/index.ts"],
+      "@easy-access/spacer-extension": [
+        "extension/spacer-extension/src/index.ts"
+      ],
       "@easy-access/superTable-extension": [
         "extension/superTable-extension/src/index.ts"
+      ],
+      "@easy-access/text-extensions": [
+        "extension/text-extensions/src/index.ts"
       ],
       "@easy-access/utils": ["utils/src/index.ts"]
     }

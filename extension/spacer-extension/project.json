@@ -1,0 +1,9 @@
+{
+  "name": "spacer-extension",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "extension/spacer-extension/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project spacer-extension --web",
+  "targets": {}
+}

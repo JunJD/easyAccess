@@ -40,11 +40,21 @@ const config = {
         buttonSecondary: 'var(--button-secondary)'
       },
 
+      borderColor: ({theme}) => ({
+        ...theme('colors'),
+        secondary: 'var(--bg-secondary)',
+        primary: 'var(--primary)',
+      }),
+
       backgroundColor: ({theme}) => ({
         ...theme('colors'),
         secondary: 'var(--bg-secondary)',
         background: 'var(--background)',
       }),
+
+      aspectRatio: {
+        'a4': '210 / 297',
+      },
 
       fontFamily: {
         sans: ['var(--font-space-grotesk)', 'var(--rubik)']

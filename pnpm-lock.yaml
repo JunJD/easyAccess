@@ -26,12 +26,21 @@ dependencies:
   '@tiptap/core':
     specifier: ^2.6.6
     version: 2.6.6(@tiptap/pm@2.6.6)
+  '@tiptap/extension-color':
+    specifier: ^2.6.6
+    version: 2.6.6(@tiptap/core@2.6.6)(@tiptap/extension-text-style@2.6.6)
   '@tiptap/extension-document':
     specifier: ^2.6.6
     version: 2.6.6(@tiptap/core@2.6.6)
+  '@tiptap/extension-focus':
+    specifier: ^2.6.6
+    version: 2.6.6(@tiptap/core@2.6.6)(@tiptap/pm@2.6.6)
   '@tiptap/extension-horizontal-rule':
     specifier: ^2.6.6
     version: 2.6.6(@tiptap/core@2.6.6)(@tiptap/pm@2.6.6)
+  '@tiptap/extension-paragraph':
+    specifier: ^2.6.6
+    version: 2.6.6(@tiptap/core@2.6.6)
   '@tiptap/extension-table':
     specifier: ^2.6.6
     version: 2.6.6(@tiptap/core@2.6.6)(@tiptap/pm@2.6.6)
@@ -51,6 +60,9 @@ dependencies:
     specifier: ^2.6.6
     version: 2.6.6(@tiptap/core@2.6.6)
   '@tiptap/extension-text':
+    specifier: ^2.6.6
+    version: 2.6.6(@tiptap/core@2.6.6)
+  '@tiptap/extension-text-style':
     specifier: ^2.6.6
     version: 2.6.6(@tiptap/core@2.6.6)
   '@tiptap/extension-typography':
@@ -110,6 +122,9 @@ dependencies:
   react-dom:
     specifier: 18.3.1
     version: 18.3.1(react@18.3.1)
+  react-icons:
+    specifier: ^5.3.0
+    version: 5.3.0(react@18.3.1)
   tailwind-merge:
     specifier: ^2.5.2
     version: 2.5.2
@@ -4828,6 +4843,16 @@ packages:
       '@tiptap/core': 2.6.6(@tiptap/pm@2.6.6)
     dev: false
 
+  /@tiptap/extension-color@2.6.6(@tiptap/core@2.6.6)(@tiptap/extension-text-style@2.6.6):
+    resolution: {integrity: sha512-aq2XnbWMak1yJxH2EoVKpCjFONRkZcX9D72LvvgOgtDQ62wG3/axZ75bT1B/NNfqlEp7U78Fpqib7jq/uCLYTg==}
+    peerDependencies:
+      '@tiptap/core': ^2.6.6
+      '@tiptap/extension-text-style': ^2.6.6
+    dependencies:
+      '@tiptap/core': 2.6.6(@tiptap/pm@2.6.6)
+      '@tiptap/extension-text-style': 2.6.6(@tiptap/core@2.6.6)
+    dev: false
+
   /@tiptap/extension-document@2.6.6(@tiptap/core@2.6.6):
     resolution: {integrity: sha512-6qlH5VWzLHHRVeeciRC6C4ZHpMsAGPNG16EF53z0GeMSaaFD/zU3B239QlmqXmLsAl8bpf8Bn93N0t2ABUvScw==}
     peerDependencies:
@@ -4855,6 +4880,16 @@ packages:
       '@tiptap/core': 2.6.6(@tiptap/pm@2.6.6)
       '@tiptap/pm': 2.6.6
       tippy.js: 6.3.7
+    dev: false
+
+  /@tiptap/extension-focus@2.6.6(@tiptap/core@2.6.6)(@tiptap/pm@2.6.6):
+    resolution: {integrity: sha512-1RnqOOZeJRc3snt1dDu4+Jo9swMMK0HkDNOOe8Z1uSQUMKzd6Cn50Rl/yxfSA1zOzyvCxqV1V0udp3C7HmrAig==}
+    peerDependencies:
+      '@tiptap/core': ^2.6.6
+      '@tiptap/pm': ^2.6.6
+    dependencies:
+      '@tiptap/core': 2.6.6(@tiptap/pm@2.6.6)
+      '@tiptap/pm': 2.6.6
     dev: false
 
   /@tiptap/extension-gapcursor@2.6.6(@tiptap/core@2.6.6)(@tiptap/pm@2.6.6):
@@ -4989,6 +5024,14 @@ packages:
 
   /@tiptap/extension-task-list@2.6.6(@tiptap/core@2.6.6):
     resolution: {integrity: sha512-0N4xCCJZu0PcKoCRDywQngNNW6qlB26hyVJGDGgW53p/2zk5gdlzAA6/NxElO3iSAXKFm0QOWAg/x8E+ggDu4w==}
+    peerDependencies:
+      '@tiptap/core': ^2.6.6
+    dependencies:
+      '@tiptap/core': 2.6.6(@tiptap/pm@2.6.6)
+    dev: false
+
+  /@tiptap/extension-text-style@2.6.6(@tiptap/core@2.6.6):
+    resolution: {integrity: sha512-8fO8m0/QI+rFKgZLP28GG2Nz0zhYsYd76O2Y+HsDTmMypJl/cdiNcVOWWffAwXAfMN43BNX7b1VI1XwGAMgYlg==}
     peerDependencies:
       '@tiptap/core': ^2.6.6
     dependencies:
@@ -13142,6 +13185,14 @@ packages:
       loose-envify: 1.4.0
       react: 18.3.1
       scheduler: 0.23.2
+
+  /react-icons@5.3.0(react@18.3.1):
+    resolution: {integrity: sha512-DnUk8aFbTyQPSkCfF8dbX6kQjXA9DktMeJqfjrg6cK9vwQVMxmcA3BfP4QoiztVmEHtwlTgLFsPuH2NskKT6eg==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.3.1
+    dev: false
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
