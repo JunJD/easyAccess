@@ -15,9 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@easy-access/column-extension": [
+        "extension/column-extension/src/index.ts"
+      ],
       "@easy-access/hooks": ["hooks/src/index.ts"],
-      "@easy-access/resemu-editor": ["resemu-editor/src/index.ts"],
       "@easy-access/resume-editor": ["resume-editor/src/index.ts"],
+      "@easy-access/superTable-extension": [
+        "extension/superTable-extension/src/index.ts"
+      ],
       "@easy-access/utils": ["utils/src/index.ts"]
     }
   },

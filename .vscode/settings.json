@@ -1,9 +1,15 @@
 {
     "cSpell.words": [
         "cacheable",
+        "cellstarts",
         "clsx",
+        "droparea",
+        "dropcursor",
+        "gapcursor",
+        "gocapsule",
         "grotesk",
         "interactjs",
+        "prosemirror",
         "rhyhorn",
         "tiptap",
         "toploader",
