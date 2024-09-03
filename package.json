@@ -58,6 +58,7 @@
     "react-parallax-tilt": "^1.7.237",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
+    "tailwindcss-radix": "^3.0.4",
     "tippy.js": "^6.3.7",
     "tslib": "^2.3.0",
     "use-keyboard-shortcut": "^1.1.6",

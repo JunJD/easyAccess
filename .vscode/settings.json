@@ -11,6 +11,7 @@
         "interactjs",
         "prosemirror",
         "rhyhorn",
+        "shadcn",
         "tiptap",
         "toploader",
         "usehooks",
