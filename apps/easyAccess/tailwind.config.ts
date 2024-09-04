@@ -21,48 +21,51 @@ const config = {
       }
     },
     extend: {
-      backgroundImage: {
-        'span-bg': 'var(--span-bg)'
-      },
       colors: {
-        white2: 'var(--white)',
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: 'var(--primary)'
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))'
         },
-        'button-secondary': 'var(--button-secondary)',
-        'button-text': 'var(--button-text)',
-        'text-secondary': 'var(--text-secondary)',
-        secondary: 'var(--secondary)',
-        button: 'var(--button)',
-        selected: 'var(--selected)',
-        dropdown: 'var(--dropdown)',
-        dropdownHover: 'var(--dropdown-hover)',
-        buttonSecondary: 'var(--button-secondary)'
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))'
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))'
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))'
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))'
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))'
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))'
+        },
       },
-
-      borderColor: ({theme}) => ({
-        ...theme('colors'),
-        secondary: 'var(--bg-secondary)',
-        primary: 'var(--primary)',
-      }),
-
-      backgroundColor: ({theme}) => ({
-        ...theme('colors'),
-        secondary: 'var(--bg-secondary)',
-        background: 'var(--background)',
-      }),
-
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out"
+      },
       aspectRatio: {
         'a4': '210 / 297',
       },
-
       fontFamily: {
         sans: ['var(--font-space-grotesk)', 'var(--rubik)']
       },
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out'
-      }
     }
   },
   plugins: [
