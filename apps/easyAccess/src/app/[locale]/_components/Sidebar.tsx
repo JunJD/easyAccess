@@ -5,12 +5,13 @@ import { Icon } from "apps/easyAccess/components/Icon";
 import { Button } from "apps/easyAccess/libs/ui/Button";
 import { Separator } from "apps/easyAccess/libs/ui/Separator";
 import { KeyboardShortcut } from "apps/easyAccess/libs/ui/shortcut";
-import { Link, useRouter } from "apps/easyAccess/src/navigation";
+import { Link, useRouter, getPathname, usePathname } from "apps/easyAccess/src/navigation";
+import { LocaleMode } from "apps/easyAccess/src/types/locale";
 // import { Button, KeyboardShortcut, Separator } from "@reactive-resume/ui";
 
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
 
-import { usePathname } from "next/navigation";
 
 import useKeyboardShortcut from "use-keyboard-shortcut";
 
@@ -41,16 +42,16 @@ type SidebarItemProps = SidebarItem & {
 };
 
 const SidebarItem = ({ path, name, shortcut, icon, onClick }: SidebarItemProps) => {
-
-    const isActive = usePathname() === path;
+    const pathname = usePathname()
+    const isActive = pathname === path;
     return (
         <Button
             asChild
             size="lg"
             variant="ghost"
             className={cn(
-                "h-auto justify-start px-4 py-3",
-                isActive && "pointer-events-none bg-secondary/50 text-secondary-foreground",
+                "h-auto justify-start px-4 py-3 hover:text-primary",
+                isActive && "pointer-events-none bg-secondary/50 text-primary",
             )}
             onClick={onClick}
         >
@@ -86,13 +87,13 @@ export const Sidebar = ({ setOpen }: SidebarProps) => {
 
     const sidebarItems: SidebarItem[] = [
         {
-            path: "/resumes",
+            path: "/dashboard/resumes",
             name: `Resumes`,
             shortcut: "⇧R",
             icon: <ReadCvLogo />,
         },
         {
-            path: "/settings",
+            path: "/dashboard/settings",
             name: `Settings`,
             shortcut: "⇧S",
             icon: <FadersHorizontal />,
