@@ -1,4 +1,4 @@
-import { ResumeDataType } from "./resume-data";
+import { ResumeDataType } from "apps/easyAccess/src/types/resume/resume-data"
 
 
 export type ResumeType = {
