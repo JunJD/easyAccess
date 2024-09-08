@@ -1,4 +1,5 @@
 import { cn } from "@easy-access/utils";
+import { useTheme } from "next-themes";
 // import { useTheme } from "@reactive-resume/hooks";
 
 
@@ -9,7 +10,8 @@ type Props = {
 
 export const Icon = ({ size = 32, className }: Props) => {
   // const { isDarkMode } = useTheme();
-  const isDarkMode = Math.random() > 0.5;
+  const { theme } = useTheme()
+  const isDarkMode = theme === 'dark';
 
   let src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
