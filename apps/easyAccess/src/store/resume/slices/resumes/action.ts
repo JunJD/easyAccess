@@ -21,7 +21,7 @@ Store,
 > = (set, get) => ({
   addResume: async (resume) => {
     resume.createdAt = new Date();
-    resume.id = uniqueId()
+    resume.builderId = uniqueId()
     resume.locked = false;
     resume.title = resume.title || '未命名简历';
     resume.updatedAt = resume.createdAt

@@ -91,11 +91,11 @@ export const DEFAULT_RESuME_DATA: ResumeDataType = {
 
 export const DEFAULT_RESUME: ResumeType = {
   createdAt: '2024-08-01',
-  id: uniqueId().toString(),
+  builderId: uniqueId().toString(),
   locked: false,
   visibility: "public",
-  slug: '我的简历',
+  // slug: '我的简历',
   title: '我的简历',
   updatedAt: '2024-09-01',
-  data: DEFAULT_RESuME_DATA
+  // data: DEFAULT_RESuME_DATA
 }
