@@ -1,6 +1,6 @@
 export type SectionsKey = "summary" | "awards"
 
-export interface SectionData  {
+export interface SectionData<T = baseItemSchema>  {
     name: string,
     columns: number,
     separateLinks: boolean,
@@ -8,7 +8,7 @@ export interface SectionData  {
 
     id: SectionsKey,
     content: string,
-    // items: baseItemSchema
+    items?: Array<T>
 }
 
 export type baseItemSchema = {

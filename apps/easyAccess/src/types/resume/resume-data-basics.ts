@@ -1,22 +1,23 @@
 import { customFieldType } from "apps/easyAccess/src/types/resume/custom-field-type"
+import { UrlObj } from "apps/easyAccess/src/types/resume/utils"
 
-export type ResumeDataBasics = {
+export interface ResumeDataBasics  {
     name: string,
     headline: string,
     email: string | null,
     phone: string,
     location: string,
-    url: string,
-    customFields: customFieldType,
+    url: UrlObj,
+    customFields: Array<customFieldType>,
     picture: {
         url: string,
-    },
-    size: number,
-    aspectRatio: number,
-    borderRadius: number,
-    effects: {
-        hidden: boolean
-    },
-    border: boolean,
-    grayscale: boolean,
+        size: number,
+        aspectRatio: number,
+        borderRadius: number,
+        effects: {
+          hidden: boolean,
+          border: boolean,
+          grayscale: boolean,
+        },
+    }
 }

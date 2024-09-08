@@ -32,6 +32,8 @@ export const createSettingsSlice: StateCreator<
     const diffs = difference(nextSettings, defaultSettings);
     funLog('diffs', () => diffs)
 
+    set({ settings: nextSettings });
+
     // await userService.updateUserSettings(diffs);
     // await get().refreshUserConfig();
   },

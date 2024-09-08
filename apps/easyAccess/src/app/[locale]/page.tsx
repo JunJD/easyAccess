@@ -5,8 +5,11 @@ import { useGlobalStore } from '../../store/global/store'
 
 export default function HomePage() {
     const t = useTranslations('HomePage');
-    const [switchThemeMode] = useGlobalStore((s) => [
+    const [themeMode, switchThemeMode] = useGlobalStore((s) => [
+        s.settings.themeMode,
         s.switchThemeMode,
     ]);
-    return <Button onClick={() => { switchThemeMode('dark') }} variant={'outline'} size={'lg'}>{t('title')}</Button>;
+    return <Button onClick={() => { switchThemeMode('dark') }} variant={'outline'} size={'lg'}>
+        {t('title')}22{themeMode}
+    </Button>;
 }

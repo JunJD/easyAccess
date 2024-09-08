@@ -1,7 +1,7 @@
-import { SectionData } from "apps/easyAccess/src/types/resume/sections/base";
+import { SectionData, baseItemSchema } from "apps/easyAccess/src/types/resume/sections/base";
 import { UrlObj } from "apps/easyAccess/src/types/resume/utils";
 
-export type AwardItem = {
+export interface AwardItem extends baseItemSchema  {
     title: string,
     awarder: string,
     date: string,

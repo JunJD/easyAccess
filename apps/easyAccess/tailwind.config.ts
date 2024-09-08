@@ -69,6 +69,7 @@ const config = {
     }
   },
   plugins: [
+    require("@tailwindcss/forms"),
     require('tailwindcss-animate'),
     require("tailwindcss-radix")()
   ]

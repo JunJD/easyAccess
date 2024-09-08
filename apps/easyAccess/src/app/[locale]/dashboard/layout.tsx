@@ -40,14 +40,14 @@ const DashboardLayout = ({
       <motion.div
         initial={{ x: -220 }}
         animate={{ x: 0 }}
-        className="bg-secondary hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-[220px] lg:flex-col bg-info"
+        className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-[220px] lg:flex-col bg-info"
       >
         <div className="h-full rounded p-4">
           <Sidebar />
         </div>
       </motion.div>
 
-      <main className="mx-6 my-4 lg:mx-8 lg:pl-[320px]">
+      <main className="mx-6 my-4 lg:mx-8 lg:pl-[220px]">
         {children}
       </main>
     </div>

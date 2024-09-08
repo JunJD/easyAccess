@@ -1,11 +1,11 @@
 import { ResumeDataType } from "apps/easyAccess/src/types/resume/resume-data"
 
 
-export type ResumeType = {
+export interface ResumeType  {
     id: string,
     title: string,
-    slug: string,
-    data: ResumeDataType,
+    // slug: string,
+    // data: ResumeDataType,
     visibility: "private" | "public",
     locked: boolean,
     createdAt: Date | string,

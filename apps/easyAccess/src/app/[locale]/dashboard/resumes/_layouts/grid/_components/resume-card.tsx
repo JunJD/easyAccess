@@ -21,9 +21,10 @@ import { BaseCard } from "./base-card";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "apps/easyAccess/libs/ui/context-menu";
 import { cn } from "@easy-access/utils";
 import { useRouter } from "apps/easyAccess/src/navigation";
+import { ResumeType } from "apps/easyAccess/src/types/resume/resumes";
 
 type Props = {
-  resume: any
+  resume: ResumeType
   // resume: ResumeDto;
 };
 
@@ -33,9 +34,8 @@ export const ResumeCard = ({ resume }: Props) => {
   // const { open: lockOpen } = useDialog<ResumeDto>("lock");
 
   // const { url, loading } = useResumePreview(resume.id);
-  const loading = true
-  const lastUpdated = dayjs.toString();
-  // resume.updatedAt
+  const loading = false
+  const url = `https://ui.shadcn.com/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1611348586804-61bf6c080437%3Fw%3D300%26dpr%3D2%26q%3D80&w=640&q=75`
 
   const onOpen = () => {
     router.push(`/builder/${resume.id}`);
@@ -62,33 +62,38 @@ export const ResumeCard = ({ resume }: Props) => {
       <ContextMenuTrigger>
         <BaseCard className="space-y-0" onClick={onOpen}>
           <AnimatePresence presenceAffectsLayout>
-            {loading && (
-              <motion.div
-                layout
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <CircleNotch
-                  size={64}
-                  weight="thin"
-                  opacity={0.5}
-                  className="animate-spin self-center justify-self-center"
-                />
-              </motion.div>
-            )}
 
-            {/* {!loading && url && (
-              <motion.img
-                layout
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                loading="lazy"
-                alt={resume.title}
-                className="size-full object-cover"
-                src={`${url}?cache=${Date.now()}`}
-              />
-            )} */}
+            <div className="space-y-3 w-full">
+              <div className="overflow-hidden rounded-sm align-middle flex items-center justify-center">
+                {loading && (
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <CircleNotch
+                      size={64}
+                      weight="thin"
+                      opacity={0.5}
+                      className="animate-spin self-center justify-self-center"
+                    />
+                  </motion.div>
+                )}
+
+                {!loading && url && (
+                  <motion.img
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    loading="lazy"
+                    alt={resume.title}
+                    className="size-full h-auto w-auto object-cover transition-all hover:scale-105 "
+                    src={`${url}`}
+                  />
+                )}
+              </div>
+            </div>
           </AnimatePresence>
 
           <AnimatePresence>
@@ -107,11 +112,11 @@ export const ResumeCard = ({ resume }: Props) => {
           <div
             className={cn(
               "absolute inset-x-0 bottom-0 z-10 flex flex-col justify-end space-y-0.5 p-4 pt-12",
-              "bg-gradient-to-t from-background/80 to-transparent",
+              "bg-gradient-to-t from-background/80 to-transparent text-foreground",
             )}
           >
             <h4 className="line-clamp-2 font-medium">{resume.title}</h4>
-            <p className="line-clamp-1 text-xs opacity-75">{`Last updated ${lastUpdated}`}</p>
+            <p className="line-clamp-1 text-xs opacity-75">{`Last updated ${resume.updatedAt}`}</p>
           </div>
         </BaseCard>
       </ContextMenuTrigger>
@@ -119,31 +124,31 @@ export const ResumeCard = ({ resume }: Props) => {
       <ContextMenuContent>
         <ContextMenuItem onClick={onOpen}>
           <FolderOpen size={14} className="mr-2" />
-          'Open'
+          'Open'打开
         </ContextMenuItem>
         <ContextMenuItem onClick={onUpdate}>
           <PencilSimple size={14} className="mr-2" />
-          'Rename'
+          'Rename'重命名
         </ContextMenuItem>
         <ContextMenuItem onClick={onDuplicate}>
           <CopySimple size={14} className="mr-2" />
-          'Duplicate'
+          'Duplicate'复制
         </ContextMenuItem>
         {resume.locked ? (
           <ContextMenuItem onClick={onLockChange}>
             <LockOpen size={14} className="mr-2" />
-            'Unlock'
+            'Unlock'解锁
           </ContextMenuItem>
         ) : (
           <ContextMenuItem onClick={onLockChange}>
             <Lock size={14} className="mr-2" />
-            'Lock'
+            'Lock'锁住
           </ContextMenuItem>
         )}
         <ContextMenuSeparator />
-        <ContextMenuItem className="text-error" onClick={onDelete}>
+        <ContextMenuItem className="text-destructive" onClick={onDelete}>
           <TrashSimple size={14} className="mr-2" />
-          'Delete'
+          'Delete'删除
         </ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>

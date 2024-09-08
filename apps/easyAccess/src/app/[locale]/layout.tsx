@@ -61,10 +61,10 @@ export default function RootLayout({
               height={3}
               crawl={true}
               easing='ease'
-              speed={200}
-              shadow='0 0 10px #2299DD,0 0 5px #2299DD'
+              speed={500}
+              shadow='0 0 10px #c17458,0 0 5px #2299DD'
               color='var(--primary)'
-              showSpinner={false}
+              showSpinner={true}
             />
             <main className='mx-auto w-full'>{children}</main>
           </NextIntlClientProvider>

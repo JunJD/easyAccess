@@ -50,8 +50,8 @@ const SidebarItem = ({ path, name, shortcut, icon, onClick }: SidebarItemProps) 
             size="lg"
             variant="ghost"
             className={cn(
-                "h-auto justify-start px-4 py-3 hover:text-primary",
-                isActive && "pointer-events-none bg-secondary/50 text-primary",
+                "h-auto justify-start px-4 py-3 hover:text-primary bg-secondary/100 hover:bg-secondary",
+                isActive && "pointer-events-none bg-secondary text-primary",
             )}
             onClick={onClick}
         >

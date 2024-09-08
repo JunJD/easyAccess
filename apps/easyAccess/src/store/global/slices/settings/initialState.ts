@@ -13,5 +13,7 @@ export interface GlobalSettingsState {
 
 export const initialSettingsState: GlobalSettingsState = {
   defaultSettings: DEFAULT_SETTINGS,
-  settings: {},
+  settings: {
+    ...DEFAULT_SETTINGS
+  },
 };
