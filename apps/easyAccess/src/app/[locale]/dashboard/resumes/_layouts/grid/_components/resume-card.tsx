@@ -60,7 +60,7 @@ export const ResumeCard = ({ resume }: Props) => {
   return (
     <ContextMenu>
       <ContextMenuTrigger>
-        <BaseCard className="space-y-0" onClick={onOpen}>
+        <BaseCard className="space-y-0 border-none" onClick={onOpen}>
           <AnimatePresence presenceAffectsLayout>
 
             <div className="space-y-3 w-full">

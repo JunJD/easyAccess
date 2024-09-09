@@ -6,6 +6,7 @@ import { GlobalSettings } from 'apps/easyAccess/src/types/settings';
 import { difference, funLog, merge } from '@easy-access/utils';
 import { ResumeType } from 'apps/easyAccess/src/types/resume/resumes';
 import { set as _set} from "lodash-es";
+import dayjs from 'dayjs';
 /**
  * 设置操作
  */
@@ -20,7 +21,7 @@ Store,
   ResumesAction
 > = (set, get) => ({
   addResume: async (resume) => {
-    resume.createdAt = new Date();
+    resume.createdAt = dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss');
     resume.builderId = uniqueId()
     resume.locked = false;
     resume.title = resume.title || '未命名简历';

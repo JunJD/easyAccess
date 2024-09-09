@@ -9,7 +9,6 @@ type Props = {
 };
 
 export const Icon = ({ size = 32, className }: Props) => {
-  // const { isDarkMode } = useTheme();
   const { theme } = useTheme()
   const isDarkMode = theme === 'dark';
 

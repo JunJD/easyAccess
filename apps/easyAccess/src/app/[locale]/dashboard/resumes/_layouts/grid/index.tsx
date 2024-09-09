@@ -10,8 +10,8 @@ import Image from "next/image";
 
 export const GridView = () => {
   // const { resumes, loading } = useResumes();
-
-  const [resumes] = useResumeStore(s => [s.resumeList])
+  
+const [resumes] = useResumeStore(s => [s.resumeList])
   const loading = false
 
   return (
@@ -53,14 +53,16 @@ export const GridView = () => {
       {resumes && (
         <AnimatePresence>
           {resumes
-            .map((resume, i) => (
-              <div
-                key={i}
-                className="duration-300 animate-in fade-in"
-                style={{ animationFillMode: "backwards", animationDelay: `${i * 300}ms` }}
+            .map((resume, index) => (
+              <motion.div
+                key={resume.builderId}
+                layout
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0, transition: { delay: (index + 2) * 0.1 } }}
+                exit={{ opacity: 0, filter: "blur(8px)", transition: { duration: 0.5 } }}
               >
                 <ResumeCard resume={resume} />
-              </div>
+              </motion.div>
             ))}
         </AnimatePresence>
       )}

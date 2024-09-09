@@ -35,7 +35,6 @@ const ResumesPage = () => {
                 </TabsList>
 
                 <AddResumeDialog />
-
             </div>
 
             <ScrollArea className="h-[calc(100vh-140px)] lg:h-[calc(100vh-88px)]">
