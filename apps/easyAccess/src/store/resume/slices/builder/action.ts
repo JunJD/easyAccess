@@ -13,6 +13,10 @@ import { ResumeDataType } from 'apps/easyAccess/src/types/resume/resume-data';
 export interface BuilderAction {
   setActiveBuilderById: (id: ResumeType['builderId']) => ResumeDataType | null;
   setResumeValue: (path: string, value: any) => void;
+
+
+  setPanelSize: (pane: 'left' | 'right', size: number) => void;
+  setPaneDragging: (pane: 'left' | 'right', dragging: boolean) => void;
 }
 
 export const createBuilderSlice: StateCreator<
@@ -36,6 +40,18 @@ export const createBuilderSlice: StateCreator<
       if (path) {
         state.activeResumeBuilder = _set(state.activeResumeBuilder, path, value);
       }
+      return state
+    });
+  },
+  setPanelSize: (pane, size) => {
+    set((state) => {
+      state.panel[pane].size = size;
+      return state
+    });
+  },
+  setPaneDragging: (pane, dragging) => {
+    set((state) => {
+      state.panel[pane].isDragging = dragging;
       return state
     });
   }
