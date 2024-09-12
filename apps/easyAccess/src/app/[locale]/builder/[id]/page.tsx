@@ -1,6 +1,7 @@
 
 'use client'
 import { useState } from "react"
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import {
     User as UserIcon,
     Briefcase,
@@ -24,7 +25,8 @@ import {
     Upload as ChevronUp,
     Download as ChevronDown,
     UserCircle as CircleUser,
-    Microphone
+    Microphone,
+    DotsSixVertical
 } from "@phosphor-icons/react"
 
 import { type Icon } from "@phosphor-icons/react"
@@ -72,6 +74,8 @@ import { Label } from "apps/easyAccess/libs/ui/label"
 import { Input } from "apps/easyAccess/libs/ui/input"
 import { Panel, PanelGroup, PanelResizeHandle } from "apps/easyAccess/libs/ui/resizable-panel"
 import { cn } from "@easy-access/utils"
+import { AnimatePresence, motion } from "framer-motion"
+import { debounce } from "lodash-es"
 
 // Helper function to render icon with fallback
 const IconWithFallback = ({ icon: Icon, ...props }: { icon: Icon } & React.ComponentPropsWithoutRef<"svg">) => {
@@ -92,6 +96,19 @@ const BuilderPage = () => {
         { id: "skills", title: "Skills", icon: Award },
         { id: "languages", title: "Languages", icon: Languages },
     ])
+
+    const onDragEnd = (result) => {
+        if (!result.destination) {
+            return
+        }
+
+        const newSections = Array.from(sections)
+        const [reorderedItem] = newSections.splice(result.source.index, 1)
+        newSections.splice(result.destination.index, 0, reorderedItem)
+
+        setSections(newSections)
+    }
+
     const [activeSection, setActiveSection] = useState("basic-info")
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     const [basicInfo, setBasicInfo] = useState({
@@ -150,9 +167,8 @@ const BuilderPage = () => {
     const handleBasicInfoChange = (field: string, value: string) => {
         setBasicInfo(prev => ({ ...prev, [field]: value }))
     }
-
     const SidebarContent = () => (
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full bg-gray-50 dark:bg-gray-900">
             <div className="flex items-center justify-between p-4 border-b">
                 <h2 className="text-lg font-semibold">Resume Sections</h2>
                 <Dialog>
@@ -182,80 +198,72 @@ const BuilderPage = () => {
                     </DialogContent>
                 </Dialog>
             </div>
-            <ScrollArea className="flex-1">
-                <nav className="grid gap-1 p-2">
-                    {sections.map((section, index) => (
-                        <div key={section.id} className="flex items-center gap-2">
-                            <Button
-                                variant={activeSection === section.id ? "secondary" : "ghost"}
-                                className="justify-start gap-2 flex-grow"
-                                onClick={() => {
-                                    setActiveSection(section.id)
-                                    if (isMobile) setIsDrawerOpen(false)
-                                }}
-                            >
-                                <IconWithFallback icon={section.icon} className="h-4 w-4" />
-                                {section.title}
-                            </Button>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={() => moveSectionUp(index)}
-                                disabled={index === 0}
-                            >
-                                <IconWithFallback icon={ChevronUp} className="h-4 w-4" />
-                            </Button>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={() => moveSectionDown(index)}
-                                disabled={index === sections.length - 1}
-                            >
-                                <IconWithFallback icon={ChevronDown} className="h-4 w-4" />
-                            </Button>
-                            {index > 5 && (
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    onClick={() => removeSection(section.id)}
-                                >
-                                    <IconWithFallback icon={X} className="h-4 w-4" />
-                                </Button>
-                            )}
-                        </div>
-                    ))}
-                </nav>
+            <ScrollArea className="flex-1 flex-col">
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable droppableId="sections" key="sections" >
+                        {(provided: any) => (
+                            <div {...provided.droppableProps} ref={provided.innerRef} className="p-2">
+                                {sections.map((section, index) => (
+                                    <Draggable key={section.id} draggableId={section.id} index={index} isDragDisabled={['basic-info'].includes(section.id)}>
+                                        {(provided: any, snapshot: any) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                className={`mb-2 ${snapshot.isDragging ? 'opacity-50' : ''}`}
+                                            >
+                                                <div className="flex items-center gap-2 bg-white dark:bg-gray-800 rounded-md border p-2 shadow-sm hover:shadow-md transition-shadow">
+                                                    <div {...provided.dragHandleProps} className="cursor-move">
+                                                        <IconWithFallback icon={DotsSixVertical} className="h-4 w-4 text-gray-400" />
+                                                    </div>
+                                                    <Button
+                                                        variant={activeSection === section.id ? "secondary" : "ghost"}
+                                                        className="justify-start gap-2 flex-grow text-left"
+                                                        onClick={() => setActiveSection(section.id)}
+                                                    >
+                                                        <IconWithFallback icon={section.icon} className="h-4 w-4" />
+                                                        {section.title}
+                                                    </Button>
+                                                    {section.id !== "basic-info" && section.id !== "personal-info" && (
+                                                        <Button
+                                                            variant="ghost"
+                                                            size="icon"
+                                                            onClick={() => removeSection(section.id)}
+                                                        >
+                                                            <IconWithFallback icon={X} className="h-4 w-4" />
+                                                        </Button>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </Draggable>
+                                ))}
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
             </ScrollArea>
             <div className="border-t p-4">
                 <Button
                     variant="outline"
-                    className="w-full justify-start gap-2"
-                    onClick={() => {
-                        setActiveTab("template")
-                        if (isMobile) setIsDrawerOpen(false)
-                    }}
+                    className="w-full justify-start gap-2 mb-2"
+                    onClick={() => setActiveTab("template")}
                 >
                     <IconWithFallback icon={Layout} className="h-4 w-4" />
                     Templates & Layout
                 </Button>
                 <Button
                     variant="outline"
-                    className="w-full justify-start gap-2 mt-2"
-                    onClick={() => {
-                        setActiveTab("ai-copilot")
-                        if (isMobile) setIsDrawerOpen(false)
-                    }}
+                    className="w-full justify-start gap-2 mb-2"
+                    onClick={() => setActiveTab("ai-copilot")}
                 >
                     <IconWithFallback icon={Bot} className="h-4 w-4" />
                     AI Copilot
                 </Button>
                 <Button
                     variant="outline"
-                    className="w-full justify-start gap-2 mt-2"
-                    onClick={() => {
-                        setActiveTab("mock-interview")
-                        if (isMobile) setIsDrawerOpen(false)
-                    }}
+                    className="w-full justify-start gap-2"
+                    onClick={() => setActiveTab("mock-interview")}
                 >
                     <IconWithFallback icon={Mess} className="h-4 w-4" />
                     AI Mock Interview
@@ -396,7 +404,7 @@ const BuilderPage = () => {
                         </Button>
                     </div>
                     <div className="space-y-4">
-                        <div className="rounded-lg border p-4">
+                        <div className="rounded-lg border p-4 bg-white dark:bg-gray-800 shadow-sm">
                             <div className="flex justify-between items-start mb-2">
                                 <div>
                                     <h3 className="font-semibold">Software Engineer</h3>
@@ -427,7 +435,7 @@ const BuilderPage = () => {
                         </Button>
                     </div>
                     <div className="space-y-4">
-                        <div className="rounded-lg border p-4">
+                        <div className="rounded-lg border p-4 bg-white dark:bg-gray-800 shadow-sm">
                             <div className="flex justify-between items-start mb-2">
                                 <div>
                                     <h3 className="font-semibold">Bachelor of Science in Computer Science</h3>
@@ -458,7 +466,7 @@ const BuilderPage = () => {
                         </Button>
                     </div>
                     <div className="space-y-2">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-2">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-2 bg-white dark:bg-gray-800 p-4 rounded-lg border shadow-sm">
                             <Input placeholder="Skill name" className="w-full md:w-2/3" />
                             <Select>
                                 <SelectTrigger className="w-full md:w-1/4">
@@ -488,7 +496,7 @@ const BuilderPage = () => {
                         </Button>
                     </div>
                     <div className="space-y-2">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-2">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-2 bg-white dark:bg-gray-800 p-4 rounded-lg border shadow-sm">
                             <Input placeholder="Language name" className="w-full md:w-2/3" />
                             <Select>
                                 <SelectTrigger className="w-full md:w-1/4">
@@ -519,7 +527,7 @@ const BuilderPage = () => {
                             </Button>
                         </div>
                         <div className="space-y-4">
-                            <div className="rounded-lg border p-4">
+                            <div className="rounded-lg border p-4 bg-white dark:bg-gray-800 shadow-sm">
                                 <div className="flex justify-between items-start mb-2">
                                     <Input placeholder="Item Title" className="w-2/3" />
                                     <Button variant="ghost" size="icon">
@@ -614,7 +622,7 @@ const BuilderPage = () => {
     const AICopilotContent = () => (
         <div className="space-y-8">
             <h2 className="text-2xl font-bold mb-4">AI Copilot</h2>
-            <div className="rounded-lg border p-4 h-[calc(100vh-12rem)] flex flex-col">
+            <div className="rounded-lg border p-4 h-[calc(100vh-12rem)] flex flex-col bg-white dark:bg-gray-800">
                 <ScrollArea className="flex-1 mb-4">
                     <div className="space-y-4">
                         <div className="bg-muted p-3 rounded-lg">
@@ -644,8 +652,8 @@ const BuilderPage = () => {
     const MockInterviewContent = () => (
         <div className="space-y-8">
             <h2 className="text-2xl font-bold mb-4">AI Video Mock Interview</h2>
-            <div className="rounded-lg border p-4 h-[calc(100vh-12rem)] flex flex-col">
-                <div className="flex-1 mb-4 flex flex-col items-center justify-center bg-gray-100 rounded-lg">
+            <div className="rounded-lg border p-4 h-[calc(100vh-12rem)] flex flex-col bg-white dark:bg-gray-800">
+                <div className="flex-1 mb-4 flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-lg">
                     <IconWithFallback icon={Video} className="h-16 w-16 text-gray-400 mb-4" />
                     <p className="text-lg font-semibold mb-2">Video Interview Simulation</p>
                     <p className="text-sm text-gray-500 mb-4">Connect your camera and microphone to start</p>
@@ -670,7 +678,6 @@ const BuilderPage = () => {
         </div>
     )
 
-
     const sheet = useResumeStore((state) => state.sheet);
     const panel = useResumeStore((state) => state.panel);
 
@@ -684,14 +691,16 @@ const BuilderPage = () => {
         <div className="relative size-full overflow-hidden">
             <PanelGroup direction="horizontal">
                 <Panel
-                    minSize={20}
+                    collapsedSize={panel.left.size}
+                    minSize={25}
                     maxSize={45}
-                    defaultSize={20}
-                    className={cn("z-10 bg-background", !panel.left.isDragging && "transition-[flex]")}
-                    onResize={leftSetSize}
+                    defaultSize={0}
+                    className={cn("z-10", !panel.left.isDragging && "transition-[flex]")}
+                    onResize={debounce(leftSetSize)}
                 >
                     <SidebarContent />
-                    {/* {isMobile ? (
+                </Panel>
+                {/* {isMobile ? (
                         <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
                             <DrawerTrigger asChild>
                                 <Button variant="outline" size="icon" className="fixed top-4 left-4 z-50">
@@ -709,34 +718,29 @@ const BuilderPage = () => {
                     ) : (
                         <SidebarContent />
                     )} */}
-                </Panel>
                 <PanelResizeHandle
                     isDragging={panel.left.isDragging}
                     onDragging={setLeftDragging}
                 />
                 <Panel >
-                    <main className="mt-16 w-screen absolute inset-0">
-                    <iframe
-                        // ref={setFrameRef}
-                        // title={resume.id}
-                        src="https://v0.dev/chat/1IfqcVbrGld"
-                        className="mt-16 w-screen"
-                        style={{ height: `calc(100vh - 64px)` }}
-                    />
+
+                    <main className="w-full absolute inset-0">
+                        <iframe
+                            // ref={setFrameRef}
+                            // title={resume.id}
+                            src="https://ui.shadcn.com/docs/components/tooltip"
+                            className="mt-16 w-screen"
+                            style={{ height: `calc(100vh - 64px)` }}
+                        />
                     </main>
                 </Panel>
                 <PanelResizeHandle
                     isDragging={panel.right.isDragging}
                     onDragging={setRightDragging}
                 />
-                <Panel
-                    minSize={20}
-                    maxSize={45}
-                    defaultSize={20}
-                    className={cn("z-10 bg-background", !panel.right.isDragging && "transition-[flex]")}
-                    onResize={rightSetSize}
-                >
-                    <div className="p-4">
+
+                <Panel defaultSize={0} minSize={35} maxSize={45} className={cn("z-10", !panel.right.isDragging && "transition-[flex]")} onResize={debounce(rightSetSize)}>
+                    <div className="p-4 h-full border-l bg-background overflow-auto">
                         {activeTab === "content" && <EditContent />}
                         {activeTab === "template" && <TemplateAndLayoutContent />}
                         {activeTab === "ai-copilot" && <AICopilotContent />}
@@ -745,7 +749,7 @@ const BuilderPage = () => {
                 </Panel>
 
             </PanelGroup>
-        </div>
+        </div >
     )
 }
 

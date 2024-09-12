@@ -1,4 +1,5 @@
 import { isEqual, uniqueId } from 'lodash-es';
+import { produce } from 'immer';
 import type { StateCreator } from 'zustand/vanilla';
 import { Store } from '../../store';
 import { DeepPartial } from 'utility-types';
@@ -37,22 +38,25 @@ export const createBuilderSlice: StateCreator<
   },
   setResumeValue: async (path, value) => {
     set((state) => {
-      if (path) {
-        state.activeResumeBuilder = _set(state.activeResumeBuilder, path, value);
-      }
-      return state
+      return produce(state, (draftState=>{
+        if (path) {
+          draftState.activeResumeBuilder = _set(draftState.activeResumeBuilder, path, value);
+        }
+      }))
     });
   },
   setPanelSize: (pane, size) => {
     set((state) => {
-      state.panel[pane].size = size;
-      return state
+      return produce(state, (draftState=>{
+        draftState.panel[pane].size = size;
+      }))
     });
   },
   setPaneDragging: (pane, dragging) => {
     set((state) => {
-      state.panel[pane].isDragging = dragging;
-      return state
+      return produce(state, (draftState=>{
+        draftState.panel[pane].isDragging = dragging;
+      }))
     });
   }
 });

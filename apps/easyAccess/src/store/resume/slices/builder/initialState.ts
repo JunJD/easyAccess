@@ -20,7 +20,6 @@ interface PanelHandle  {
 
 interface Panel extends PanelHandle {
   size: number;
-  // setSize: (size: number) => void;
   isDragging: boolean;
 };
 
