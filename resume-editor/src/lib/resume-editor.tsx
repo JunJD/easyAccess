@@ -1,4 +1,3 @@
-"use client"
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from "@tiptap/starter-kit"
 import Document from '@tiptap/extension-document'
@@ -12,7 +11,6 @@ import Color from '@tiptap/extension-color'
 import { SpacerNode } from "@easy-access/spacer-extension"
 import Focus from '@tiptap/extension-focus'
 import './index.css'
-import { ResumeTextStyle } from '@easy-access/text-extensions'
 import { Column, ColumnBlock } from '@easy-access/column-extension'
 import { Command, suggestion } from '@easy-access/commands-extension'
 interface Props {
@@ -44,7 +42,6 @@ export const ResumeEditor = ({
       Text,
       Column,
       ColumnBlock,
-      ResumeTextStyle,
       Color.configure({
         types: ['textStyle'],
       }),

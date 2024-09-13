@@ -11547,8 +11547,6 @@ packages:
     peerDependenciesMeta:
       webpack:
         optional: true
-      webpack-sources:
-        optional: true
     dependencies:
       webpack: 5.94.0(@swc/core@1.5.29)
       webpack-sources: 3.2.3

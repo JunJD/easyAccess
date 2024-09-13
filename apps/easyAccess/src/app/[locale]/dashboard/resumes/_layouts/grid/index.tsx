@@ -5,7 +5,7 @@ import { BaseCard } from "./_components/base-card";
 import { useResumeStore } from "apps/easyAccess/src/store/resume/store";
 
 import { ResumeCard } from "./_components/resume-card";
-import { sortByDate } from "@easy-access/utils";
+
 import Image from "next/image";
 
 export const GridView = () => {

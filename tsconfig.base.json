@@ -29,9 +29,6 @@
       "@easy-access/superTable-extension": [
         "extension/superTable-extension/src/index.ts"
       ],
-      "@easy-access/text-extensions": [
-        "extension/text-extensions/src/index.ts"
-      ],
       "@easy-access/utils": ["utils/src/index.ts"]
     }
   },
