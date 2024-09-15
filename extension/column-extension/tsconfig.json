@@ -16,7 +16,7 @@
       "extension/column-extension/src/index.ts"
     ],
     "@easy-access/hooks": ["hooks/src/index.ts"],
-    "@easy-access/resume-editor": ["resume-editor/src/index.ts"],
+    // "@easy-access/resume-editor": ["resume-editor/src/index.ts"],
     "@easy-access/utils": ["utils/src/index.ts"]
   },
   "references": [

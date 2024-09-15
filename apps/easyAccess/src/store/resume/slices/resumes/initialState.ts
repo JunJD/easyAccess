@@ -6,12 +6,12 @@ import { ResumeType } from 'apps/easyAccess/src/types/resume/resumes';
 
 export type ResumesState = {
   resumeList: Array<ResumeType>,
-  activeResumeId: ResumeType['id'],
+  activeResumeId: ResumeType['builderId'],
 }
 
 export const initialResumeState: ResumesState = {
   resumeList: [
     DEFAULT_RESUME
   ],
-  activeResumeId: DEFAULT_RESUME.id,
+  activeResumeId: DEFAULT_RESUME.builderId,
 };
