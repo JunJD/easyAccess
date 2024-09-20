@@ -1,8 +1,0 @@
-{
-  "build": {
-    "command": "pnpm run build",
-    "env": {
-      "NODE_ENV": "production"
-    }
-  }
-}
