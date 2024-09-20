@@ -1,0 +1,13 @@
+{
+  "build": {
+    "command": "pnpm run build",
+    "env": {
+      "NODE_ENV": "production"
+    }
+  },
+  "develop": {
+    "command": "pnpm run develop",
+    "host": "0.0.0.0",
+    "port": 3000
+  }
+}
