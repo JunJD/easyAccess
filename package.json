@@ -6,7 +6,8 @@
     "start": "nx start",
     "dev": "nx dev",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "preinstall": "npx only-allow pnpm"
   },
   "private": true,
   "dependencies": {
