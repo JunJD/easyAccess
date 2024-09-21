@@ -6,10 +6,10 @@ import {
   useMessages
 } from 'next-intl'
 import { Space_Grotesk } from 'next/font/google'
-import NextTopLoader from 'nextjs-toploader'
 
 import './globals.css'
 import { ThemeProvider } from './provider/ThemeProvider'
+import NextTopLoader from 'nextjs-toploader'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -63,7 +63,7 @@ export default function RootLayout({
               easing='ease'
               speed={500}
               shadow='0 0 10px #c17458,0 0 5px #2299DD'
-              color='var(--primary)'
+              color='hsl(var(--primary))'
               showSpinner={true}
             />
             <main className='mx-auto w-full'>{children}</main>

@@ -10,6 +10,7 @@
         "gocapsule",
         "grotesk",
         "headlessui",
+        "immer",
         "interactjs",
         "prosemirror",
         "rhyhorn",

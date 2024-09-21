@@ -20,7 +20,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { BaseCard } from "./base-card";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "apps/easyAccess/libs/ui/context-menu";
 import { cn } from "@easy-access/utils";
-import { useRouter } from "apps/easyAccess/src/navigation";
+import { useRouter, Link } from "apps/easyAccess/src/navigation";
+
 import { ResumeType } from "apps/easyAccess/src/types/resume/resumes";
 
 type Props = {
