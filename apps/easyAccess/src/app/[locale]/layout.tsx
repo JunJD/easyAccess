@@ -35,7 +35,7 @@ export default function RootLayout({
       className={`${space_grotesk.variable} scroll-smooth`}
       suppressHydrationWarning
     >
-      <body>
+      <body suppressHydrationWarning={true}>
         <ThemeProvider
           enableSystem
           attribute='class'

@@ -1,7 +1,7 @@
 import { SectionsKey } from "./sections/base";
 
 export type ResumeDataMetadata = {
-    template: "rhyhorn" | "default",
+    template: "design",
     layout: Array<Array<Array<SectionsKey>>>, // pages -> columns -> sections
     css: {
         value: string,

@@ -49,11 +49,11 @@ export const initialBuilderState: BuilderState = {
   },
   panel: {
     left: {
-      size: 0,
+      size: 25,
       isDragging: false
     },
     right: {
-      size: 0,
+      size: 35,
       isDragging: false
     }
   }
