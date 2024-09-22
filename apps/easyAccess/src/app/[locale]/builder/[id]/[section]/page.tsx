@@ -28,6 +28,7 @@ import { SectionListItem } from './_component/sectionListItem'
 import { Label } from "apps/easyAccess/libs/ui/label"
 import { Input } from "apps/easyAccess/libs/ui/input"
 import { Button } from "apps/easyAccess/libs/ui/Button"
+import { useResumeStore } from "apps/easyAccess/src/store/resume/store"
 
 interface BasicInfo {
   name: string
@@ -59,16 +60,9 @@ type SectionType = 'work' | 'education' | 'projects' | 'basic-info'
 export default function SectionPage() {
   const params = useParams()
   const { section } = params
+  const setValue = useResumeStore((state) => state.setResumeValue);
+  const basicInfo = useResumeStore(state => state.activeResumeBuilder.basics)
 
-  const [basicInfo, setBasicInfo] = useState<BasicInfo>({
-    name: "",
-    headline: "",
-    email: "",
-    phone: "",
-    website: "",
-    location: "",
-    customFields: []
-  })
 
   const [workExperience, setWorkExperience] = useState<ExperienceItem[]>([
     { id: "1", company: "", position: "", dateRange: "", summary: "", visible: true }
@@ -104,7 +98,7 @@ export default function SectionPage() {
           <Input
             id="basics.name"
             value={basicInfo.name}
-            onChange={(e) => setBasicInfo({ ...basicInfo, name: e.target.value })}
+            onChange={(e) => setValue("basics.name", e.target.value)}
           />
         </div>
 
@@ -113,7 +107,7 @@ export default function SectionPage() {
           <Input
             id="basics.headline"
             value={basicInfo.headline}
-            onChange={(e) => setBasicInfo({ ...basicInfo, headline: e.target.value })}
+            onChange={(e) =>  setValue("basics.headline", e.target.value)}
           />
         </div>
 
@@ -122,8 +116,8 @@ export default function SectionPage() {
           <Input
             id="basics.email"
             placeholder="john.doe@example.com"
-            value={basicInfo.email}
-            onChange={(e) => setBasicInfo({ ...basicInfo, email: e.target.value })}
+            value={basicInfo.email??''}
+            onChange={(e) => setValue("basics.email", e.target.value) }
           />
         </div>
 
@@ -133,11 +127,11 @@ export default function SectionPage() {
             id="basics.phone"
             placeholder="+86 123 4567 8900"
             value={basicInfo.phone}
-            onChange={(e) => setBasicInfo({ ...basicInfo, phone: e.target.value })}
+            onChange={(e) => setValue("basics.phone", e.target.value)}
           />
         </div>
 
-        <div className="space-y-1.5">
+        {/* <div className="space-y-1.5">
           <Label htmlFor="basics.website">个人网站</Label>
           <Input
             id="basics.website"
@@ -145,14 +139,14 @@ export default function SectionPage() {
             value={basicInfo.website}
             onChange={(e) => setBasicInfo({ ...basicInfo, website: e.target.value })}
           />
-        </div>
+        </div> */}
 
         <div className="space-y-1.5">
           <Label htmlFor="basics.location">所在地</Label>
           <Input
             id="basics.location"
             value={basicInfo.location}
-            onChange={(e) => setBasicInfo({ ...basicInfo, location: e.target.value })}
+            onChange={(e) => setValue("basics.location", e.target.value) }
           />
         </div>
 
@@ -162,11 +156,11 @@ export default function SectionPage() {
             <div key={index} className="flex space-x-2">
               <Input
                 placeholder="字段名"
-                value={field.key}
+                value={field.id}
                 onChange={(e) => {
                   const newFields = [...basicInfo.customFields]
-                  newFields[index].key = e.target.value
-                  setBasicInfo({ ...basicInfo, customFields: newFields })
+                  newFields[index].id = e.target.value
+                  setValue("basics.customFields", newFields) 
                 }}
               />
               <Input
@@ -175,7 +169,7 @@ export default function SectionPage() {
                 onChange={(e) => {
                   const newFields = [...basicInfo.customFields]
                   newFields[index].value = e.target.value
-                  setBasicInfo({ ...basicInfo, customFields: newFields })
+                  setValue("basics.customFields", newFields) 
                 }}
               />
               <Button
@@ -183,7 +177,7 @@ export default function SectionPage() {
                 size="icon"
                 onClick={() => {
                   const newFields = basicInfo.customFields.filter((_, i) => i !== index)
-                  setBasicInfo({ ...basicInfo, customFields: newFields })
+                  setValue("basics.customFields", newFields) 
                 }}
               >
                 <Trash size={16} />
@@ -193,10 +187,7 @@ export default function SectionPage() {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setBasicInfo({
-              ...basicInfo,
-              customFields: [...basicInfo.customFields, { key: "", value: "" }]
-            })}
+            onClick={() => setValue("basics.customFields", [...basicInfo.customFields, { key: "", value: "" }]) }
           >
             <Plus size={16} className="mr-2" />
             添加自定义字段
