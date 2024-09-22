@@ -5,11 +5,15 @@ import { Panel, PanelGroup, PanelResizeHandle } from "apps/easyAccess/libs/ui/re
 import { cn } from "@easy-access/utils"
 import { debounce } from "lodash-es"
 import SidebarContent from "../_component/SidebarContent"
-import { LegacyRef, useCallback, useEffect, useRef } from "react";
+import { LegacyRef, useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import { NotIframeProviders } from "../../artboard/providers/notIframe";
+import ArtboardPage from "../../artboard/page";
 
 
 const BuilderLayout = ({ children }: { children: React.ReactNode }) => {
     const panel = useResumeStore((state) => state.panel);
+    const frameRef = useResumeStore((state) => state.frameRef);
+    const setFrameRef = useResumeStore((state) => state.setFrameRef);
     const builder = useResumeStore(state => state.activeResumeBuilder)
     const leftSetSize = useResumeStore((state) => (size: number) => state.setPanelSize("left", size));
     const rightSetSize = useResumeStore((state) => (size: number) => state.setPanelSize("right", size));
@@ -17,31 +21,31 @@ const BuilderLayout = ({ children }: { children: React.ReactNode }) => {
     const setLeftDragging = useResumeStore((state) => (dragging: boolean) => state.setPaneDragging("left", dragging));
     const setRightDragging = useResumeStore((state) => (dragging: boolean) => state.setPaneDragging("right", dragging));
 
-    const frameRef = useRef<HTMLIFrameElement | null>(null)
 
 
     const updateResumeInFrame = useCallback(() => {
-        console.log('frameRef.current!.contentWindow', frameRef.current!.contentWindow)
-        if (!frameRef.current!.contentWindow) return;
+        console.log('frameRef?.contentWindow', frameRef?.contentWindow)
+        if (!frameRef?.contentWindow) return;
         const message = { type: "SET_RESUME", payload: builder };
-        console.log(builder, 'resume.data');
 
         (() => {
-            frameRef.current!.contentWindow.postMessage(message, "*");
+            frameRef!.contentWindow.postMessage(message, "*");
         })();
     }, [frameRef, builder]);
 
 
     // 在初始加载时向iframe发送恢复数据
     useEffect(() => {
-        if (!frameRef.current) return;
-        frameRef.current!.addEventListener("load", updateResumeInFrame);
-        return () => {
-            frameRef.current!.removeEventListener("load", updateResumeInFrame);
-        };
+        if (!frameRef) return;
+        console.dir(frameRef)
+        updateResumeInFrame()
+
     }, [frameRef]);
 
-    useEffect(updateResumeInFrame, [builder]);
+    useEffect(() => {
+        console.log('builder change 111')
+        updateResumeInFrame()
+    }, [builder]);
 
     return (
         <div className="relative size-full overflow-hidden">
@@ -64,12 +68,17 @@ const BuilderLayout = ({ children }: { children: React.ReactNode }) => {
                 <Panel >
 
                     <main className="w-full absolute inset-0">
-                        <iframe
-                            ref={(frameRef)}
-                            src="/zh/artboard"
-                            className="w-screen"
-                            style={{ height: '100%' }}
-                        />
+                        <NotIframeProviders resume={builder}>
+                            <ArtboardPage>
+
+                            </ArtboardPage>
+                            {/* <iframe
+                                ref={setFrameRef}
+                                src="/zh/artboard"
+                                className="w-screen"
+                                style={{ height: '100%' }}
+                                /> */}
+                        </NotIframeProviders>
                     </main>
                 </Panel>
                 <PanelResizeHandle

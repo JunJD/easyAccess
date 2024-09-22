@@ -1,6 +1,6 @@
 
 import { create } from "zustand";
-import { ResumeDataType } from "../../types/resume/resume-data";
+import { ResumeDataType } from "apps/easyAccess/src/types/resume/resume-data";
 
 export type ArtboardStore = {
     resume: ResumeDataType;

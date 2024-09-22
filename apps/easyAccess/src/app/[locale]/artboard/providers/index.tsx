@@ -8,9 +8,13 @@ export const Providers = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
+
       if (event.origin !== window.location.origin) return;
 
-      if (event.data.type === "SET_RESUME") setResume(event.data.payload);
+      if (event.data.type === "SET_RESUME") {
+        alert('event.data.payload' + event.data.payload)
+        setResume(event.data.payload)
+      };
       if (event.data.type === "SET_THEME") {
         event.data.payload === "dark"
           ? document.documentElement.classList.add("dark")
@@ -20,7 +24,7 @@ export const Providers = ({ children }: PropsWithChildren) => {
 
     const resumeData = window.localStorage.getItem("resume");
     if (resumeData) {
-      console.log(resumeData, 'resumeData')
+
       setResume(JSON.parse(resumeData));
       return;
     }
@@ -32,8 +36,9 @@ export const Providers = ({ children }: PropsWithChildren) => {
     };
   }, [setResume]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  if (!resume) return null;
+  useEffect(() => {
+    alert('resume' + resume)
+  }, [resume])
 
-  return <>{children}</>;
+  return <>{resume && children}</>;
 };

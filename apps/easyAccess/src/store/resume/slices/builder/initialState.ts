@@ -26,6 +26,7 @@ interface Panel extends PanelHandle {
 export type BuilderState = {
   resumeBuilderList: Array<BuilderDataType>,
   activeResumeBuilder: ResumeDataType,
+  frameRef: HTMLIFrameElement | null;
   sheet: {
     left: Sheet;
     right: Sheet;
@@ -39,6 +40,7 @@ export type BuilderState = {
 export const initialBuilderState: BuilderState = {
   resumeBuilderList: [{ ...DEFAULT_RESuME_DATA, id: DEFAULT_RESUME.builderId }],
   activeResumeBuilder: DEFAULT_RESuME_DATA,
+  frameRef: null,
   sheet: {
     left: {
       open: false
