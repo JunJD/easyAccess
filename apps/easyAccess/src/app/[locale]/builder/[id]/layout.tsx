@@ -67,8 +67,8 @@ const BuilderLayout = ({ children }: { children: React.ReactNode }) => {
                         <iframe
                             ref={(frameRef)}
                             src="/zh/artboard"
-                            className="mt-16 w-screen"
-                            style={{ height: `calc(100vh - 64px)` }}
+                            className="w-screen"
+                            style={{ height: '100%' }}
                         />
                     </main>
                 </Panel>
@@ -77,7 +77,7 @@ const BuilderLayout = ({ children }: { children: React.ReactNode }) => {
                     onDragging={setRightDragging}
                 />
 
-                <Panel defaultSize={0} minSize={35} maxSize={45} className={cn("z-10", !panel.right.isDragging && "transition-[flex]")} onResize={debounce(rightSetSize)}>
+                <Panel defaultSize={0} minSize={25} maxSize={45} className={cn("z-10", !panel.right.isDragging && "transition-[flex]")} onResize={debounce(rightSetSize)}>
                     <div className="p-4 h-full border-l bg-background overflow-auto">
                         {children}
                         {/* {activeTab === "content" && <EditContent />} */}

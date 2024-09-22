@@ -46,7 +46,8 @@ const ArtboardPage = () => {
   return (
     <TransformWrapper
       ref={transformRef}
-      centerOnInit
+      initialPositionY={36}
+      initialPositionX={(document.body.clientWidth - (layout.length * (pageSizeMap[format].width * MM_TO_PX))) / 2 + 60}
       maxScale={2}
       minScale={0.4}
       initialScale={0.8}

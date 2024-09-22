@@ -71,7 +71,7 @@ import { ResumeType } from "apps/easyAccess/src/types/resume/resumes";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { Input } from "apps/easyAccess/libs/ui/input"
-import { useRouter } from "apps/easyAccess/src/navigation"
+import { Link, useRouter } from "apps/easyAccess/src/navigation"
 import IconWithFallback from "./IconWithFallback"
 
 
@@ -93,13 +93,11 @@ const SidebarContent = () => {
     const [activeSection, setActiveSection] = useState("basic-info")
     const [sections, setSections] = useState([
         { id: "basic-info", title: "Basic Info", icon: CircleUser },
-        { id: "personal-info", title: "Personal Info", icon: Phone },
         { id: "work-experience", title: "Work Experience", icon: Briefcase },
         { id: "education", title: "Education", icon: GraduationCap },
-        { id: "skills", title: "Skills", icon: Award },
-        { id: "languages", title: "Languages", icon: Languages },
+        { id: "projects", title: "Skills", icon: Award },
     ])
-    
+
     const addCustomSection = (title: string) => {
         const newSection = {
             id: title.toLowerCase().replace(/\s+/g, '-'),
@@ -156,6 +154,7 @@ const SidebarContent = () => {
                                 {sections.map((section, index) => (
                                     <Draggable key={section.id} draggableId={section.id} index={index} isDragDisabled={['basic-info'].includes(section.id)}>
                                         {(provided: any, snapshot: any) => (
+
                                             <div
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
@@ -166,12 +165,14 @@ const SidebarContent = () => {
                                                         <IconWithFallback icon={DotsSixVertical} className="h-4 w-4 text-gray-400" />
                                                     </div>
                                                     <Button
+                                                        asChild
                                                         variant={activeSection === section.id ? "secondary" : "ghost"}
                                                         className="justify-start gap-2 flex-grow text-left"
-                                                        onClick={() => setActiveSection(section.id)}
                                                     >
-                                                        <IconWithFallback icon={section.icon} className="h-4 w-4" />
-                                                        {section.title}
+                                                        <Link href={`/builder/${id}/${section.id}`}>
+                                                            <IconWithFallback icon={section.icon} className="h-4 w-4" />
+                                                            {section.title}
+                                                        </Link>
                                                     </Button>
                                                     {section.id !== "basic-info" && section.id !== "personal-info" && (
                                                         <Button
@@ -184,6 +185,7 @@ const SidebarContent = () => {
                                                     )}
                                                 </div>
                                             </div>
+
                                         )}
                                     </Draggable>
                                 ))}
@@ -195,28 +197,34 @@ const SidebarContent = () => {
             </ScrollArea>
             <div className="border-t p-4">
                 <Button
+                    asChild
                     variant="outline"
                     className="w-full justify-start gap-2 mb-2"
-                    onClick={() => router.push(`/builder/${id}/template`)}
                 >
-                    <IconWithFallback icon={Layout} className="h-4 w-4" />
-                    Templates & Layout
+                    <Link href={`/builder/${id}/template`}>
+                        <IconWithFallback icon={Layout} className="h-4 w-4" />
+                        Templates & Layout
+                    </Link>
                 </Button>
                 <Button
+                    asChild
                     variant="outline"
                     className="w-full justify-start gap-2 mb-2"
-                    onClick={() => router.push(`/builder/${id}/ai-copilot`)}
                 >
-                    <IconWithFallback icon={Bot} className="h-4 w-4" />
-                    AI Copilot
+                    <Link href={`/builder/${id}/ai-copilot`}>
+                        <IconWithFallback icon={Bot} className="h-4 w-4" />
+                        AI Copilot
+                    </Link>
                 </Button>
                 <Button
+                    asChild
                     variant="outline"
                     className="w-full justify-start gap-2"
-                    onClick={() => router.push(`/builder/${id}/mock-interview`)}
                 >
-                    <IconWithFallback icon={Mess} className="h-4 w-4" />
-                    AI Mock Interview
+                    <Link href={`/builder/${id}/mock-interview`}>
+                        <IconWithFallback icon={Mess} className="h-4 w-4" />
+                        AI Mock Interview
+                    </Link>
                 </Button>
             </div>
         </div>
