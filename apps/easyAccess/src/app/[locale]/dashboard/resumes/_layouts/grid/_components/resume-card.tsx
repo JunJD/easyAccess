@@ -61,7 +61,7 @@ export const ResumeCard = ({ resume }: Props) => {
   return (
     <ContextMenu>
       <ContextMenuTrigger>
-        <BaseCard className="space-y-0 border-none" onClick={onOpen}>
+        <BaseCard className="space-y-0 border-none">
           <AnimatePresence presenceAffectsLayout>
 
             <div className="space-y-3 w-full">
@@ -83,15 +83,17 @@ export const ResumeCard = ({ resume }: Props) => {
                 )}
 
                 {!loading && url && (
-                  <motion.img
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    loading="lazy"
-                    alt={resume.title}
-                    className="size-full h-auto w-auto object-cover transition-all hover:scale-105 "
-                    src={`${url}`}
-                  />
+                  <Link href={`/builder/${resume.builderId}`}>
+                    <motion.img
+                      layout
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      loading="lazy"
+                      alt={resume.title}
+                      className="size-full h-auto w-auto object-cover transition-all hover:scale-105 "
+                      src={`${url}`}
+                    />
+                  </Link>
                 )}
               </div>
             </div>
@@ -123,9 +125,11 @@ export const ResumeCard = ({ resume }: Props) => {
       </ContextMenuTrigger>
 
       <ContextMenuContent>
-        <ContextMenuItem onClick={onOpen}>
-          <FolderOpen size={14} className="mr-2" />
+        <ContextMenuItem asChild>
+          <Link href={`/builder/${resume.builderId}`}>
+            <FolderOpen size={14} className="mr-2" />
           'Open'打开
+          </Link>
         </ContextMenuItem>
         <ContextMenuItem onClick={onUpdate}>
           <PencilSimple size={14} className="mr-2" />
