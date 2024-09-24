@@ -9,11 +9,13 @@ import { GridView } from "./_layouts/grid";
 // import { ListView } from "./_layouts/list";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "apps/easyAccess/libs/ui/tabs";
 import { ScrollArea } from "apps/easyAccess/libs/ui/scroll-area";
+import { useTranslations } from "next-intl";
 import { AddResumeDialog } from "../../_components/addResumeDialog";
 type Layout = "grid" | "list";
 
 const ResumesPage = () => {
     const [layout, setLayout] = useState<Layout>("grid");
+    const t = useTranslations('dashboard.resumes.tab')
     return (
         <Tabs
             value={layout}
@@ -26,11 +28,11 @@ const ResumesPage = () => {
                 <TabsList>
                     <TabsTrigger value="grid" className="size-8 p-0 sm:h-8 sm:w-auto sm:px-4">
                         <SquaresFour />
-                        <span className="ml-2 hidden sm:block">Grid</span>
+                        <span className="ml-2 hidden sm:block">{t('grid')}</span>
                     </TabsTrigger>
                     <TabsTrigger value="list" className="size-8 p-0 sm:h-8 sm:w-auto sm:px-4">
                         <List />
-                        <span className="ml-2 hidden sm:block">List</span>
+                        <span className="ml-2 hidden sm:block">{t('list')}</span>
                     </TabsTrigger>
                 </TabsList>
 

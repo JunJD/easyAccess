@@ -2,5 +2,17 @@
   "HomePage": {
     "title": "Hello world!",
     "Theme": "Theme"
+  },
+  "dashboard": {
+    "sidebar": {
+      "resumes": "Resumes",
+      "settings": "Settings"
+    },
+    "resumes": {
+      "tab": {
+        "grid": "Grid",
+        "list": "List"
+      }
+    }
   }
 }

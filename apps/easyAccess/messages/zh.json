@@ -2,5 +2,17 @@
   "HomePage": {
     "title": "俺老孙来也!",
     "Theme": "主题"
+  },
+  "dashboard": {
+    "sidebar": {
+      "resumes": "简历列表",
+      "settings": "设置页"
+    },
+    "resumes": {
+      "tab": {
+        "grid": "网格",
+        "list": "列表"
+      }
+    }
   }
 }
