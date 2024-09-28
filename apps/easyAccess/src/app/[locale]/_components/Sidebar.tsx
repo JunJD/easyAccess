@@ -6,10 +6,6 @@ import { Button } from "apps/easyAccess/libs/ui/Button";
 import { Separator } from "apps/easyAccess/libs/ui/Separator";
 import { KeyboardShortcut } from "apps/easyAccess/libs/ui/shortcut";
 import { Link, useRouter, getPathname, usePathname } from "apps/easyAccess/src/navigation";
-
-import { LocaleMode } from "apps/easyAccess/src/types/locale";
-// import { Button, KeyboardShortcut, Separator } from "@reactive-resume/ui";
-
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 

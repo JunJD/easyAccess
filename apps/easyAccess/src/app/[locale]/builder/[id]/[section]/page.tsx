@@ -29,6 +29,7 @@ import { Label } from "apps/easyAccess/libs/ui/label"
 import { Input } from "apps/easyAccess/libs/ui/input"
 import { Button } from "apps/easyAccess/libs/ui/Button"
 import { useResumeStore } from "apps/easyAccess/src/store/resume/store"
+import { curry } from "lodash-es"
 
 interface BasicInfo {
   name: string
@@ -60,8 +61,11 @@ type SectionType = 'work' | 'education' | 'projects' | 'basic-info'
 export default function SectionPage() {
   const params = useParams()
   const { section } = params
-  const setValue = useResumeStore((state) => state.setResumeValue);
-  const basicInfo = useResumeStore(state => state.activeResumeBuilder.basics)
+  const setValue = useResumeStore((state) => curry(state.setResumeValue))(params.id as string);
+  const basicInfo = useResumeStore(state => {
+    console.log(state.activeResumeData.basics, 'state.activeResumeData.basics')
+    return state.activeResumeData.basics
+  })
 
 
   const [workExperience, setWorkExperience] = useState<ExperienceItem[]>([

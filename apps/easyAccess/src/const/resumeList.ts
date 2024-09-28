@@ -47,7 +47,7 @@ export const DEFAULT_RESuME_DATA: ResumeDataType = {
     }
   },
     metadata: {
-    template: "default",
+    template: 'design',
     layout: [
       [
         ["summary",],

@@ -5,47 +5,23 @@ import { Panel, PanelGroup, PanelResizeHandle } from "apps/easyAccess/libs/ui/re
 import { cn } from "@easy-access/utils"
 import { debounce } from "lodash-es"
 import SidebarContent from "../_component/SidebarContent"
-import { LegacyRef, useCallback, useEffect, useLayoutEffect, useRef } from "react";
+
 import { NotIframeProviders } from "../../artboard/providers/notIframe";
 import ArtboardPage from "../../artboard/page";
-
+import { useParams } from "next/navigation";
+import useBuilder from "apps/easyAccess/src/hooks/useBuilder";
 
 const BuilderLayout = ({ children }: { children: React.ReactNode }) => {
+    const params = useParams()
+    const id = params.id
+    const builderData = useBuilder(id as string)
+
     const panel = useResumeStore((state) => state.panel);
-    const frameRef = useResumeStore((state) => state.frameRef);
-    const setFrameRef = useResumeStore((state) => state.setFrameRef);
-    const builder = useResumeStore(state => state.activeResumeBuilder)
     const leftSetSize = useResumeStore((state) => (size: number) => state.setPanelSize("left", size));
     const rightSetSize = useResumeStore((state) => (size: number) => state.setPanelSize("right", size));
 
     const setLeftDragging = useResumeStore((state) => (dragging: boolean) => state.setPaneDragging("left", dragging));
     const setRightDragging = useResumeStore((state) => (dragging: boolean) => state.setPaneDragging("right", dragging));
-
-
-
-    const updateResumeInFrame = useCallback(() => {
-        console.log('frameRef?.contentWindow', frameRef?.contentWindow)
-        if (!frameRef?.contentWindow) return;
-        const message = { type: "SET_RESUME", payload: builder };
-
-        (() => {
-            frameRef!.contentWindow.postMessage(message, "*");
-        })();
-    }, [frameRef, builder]);
-
-
-    // 在初始加载时向iframe发送恢复数据
-    useEffect(() => {
-        if (!frameRef) return;
-        console.dir(frameRef)
-        updateResumeInFrame()
-
-    }, [frameRef]);
-
-    useEffect(() => {
-        console.log('builder change 111')
-        updateResumeInFrame()
-    }, [builder]);
 
     return (
         <div className="relative size-full overflow-hidden">
@@ -68,16 +44,10 @@ const BuilderLayout = ({ children }: { children: React.ReactNode }) => {
                 <Panel >
 
                     <main className="w-full absolute inset-0">
-                        <NotIframeProviders resume={builder}>
+                        <NotIframeProviders resume={builderData}>
                             <ArtboardPage>
 
                             </ArtboardPage>
-                            {/* <iframe
-                                ref={setFrameRef}
-                                src="/zh/artboard"
-                                className="w-screen"
-                                style={{ height: '100%' }}
-                                /> */}
                         </NotIframeProviders>
                     </main>
                 </Panel>

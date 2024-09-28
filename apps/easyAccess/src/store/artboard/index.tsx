@@ -1,15 +1,17 @@
 
+import { ResumeData } from "apps/easyAccess/libs/schema";
 import { create } from "zustand";
-import { ResumeDataType } from "apps/easyAccess/src/types/resume/resume-data";
+
 
 export type ArtboardStore = {
-    resume: ResumeDataType;
-    setResume: (resume: ResumeDataType) => void;
+    resume: ResumeData;
+    setResume: (resume: ResumeData) => void;
 };
 
 export const useArtboardStore = create<ArtboardStore>()((set) => ({
-    resume: null as unknown as ResumeDataType,
+    resume: null as unknown as ResumeData,
     setResume: (resume) => {
+        console.log("setResume", resume);
         set({ resume });
     },
 }));

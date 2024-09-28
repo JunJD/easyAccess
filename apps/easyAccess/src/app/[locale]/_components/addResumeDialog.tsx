@@ -17,8 +17,10 @@ import { useResumeStore } from 'apps/easyAccess/src/store/resume/store';
 import { buttonVariants } from "apps/easyAccess/libs/ui/variants/button"
 import { useState } from "react"
 import { ResumeType } from "apps/easyAccess/src/types/resume/resumes"
+import { useTranslations } from "next-intl"
 
 export function AddResumeDialog() {
+  const t = useTranslations('dashboard.resumes')
   const [open, setOpen] = useState(false)
   const [addResume] = useResumeStore(s => [s.addResume])
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -37,31 +39,31 @@ export function AddResumeDialog() {
           whileTap={{ scale: 0.9 }}
           className={buttonVariants({ variant: "default", size: "default", className: "w-30" })}
         >
-          新增简历
+          {t('add.title')}
         </motion.button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>新增简历</DialogTitle>
+          <DialogTitle>{t('add.title')}</DialogTitle>
           <DialogDescription>
-            简历名称用于分类,请与其他简历名称不要重复.
+            {t('add.description')}
           </DialogDescription>
         </DialogHeader>
 
         <form className="mt-2 space-y-2" onSubmit={handleSubmit}>
-            <Label
-              htmlFor="title"
-              className="text-xs font-medium text-gray-700 dark:text-gray-400"
-            >
-              简历名称
-            </Label>
-            <Input
-              id="title"
-              name="title"
-              type="text"
-              placeholder="这里填写新建简历名称"
-              autoComplete="given-name"
-            />
+          <Label
+            htmlFor="title"
+            className="text-xs font-medium text-gray-700 dark:text-gray-400"
+          >
+            {t('add.name')}
+          </Label>
+          <Input
+            id="title"
+            name="title"
+            type="text"
+            placeholder={t('add.placeholder')}
+            autoComplete="given-name"
+          />
           <DialogFooter>
             <motion.button
               whileHover={{ scale: 1.1 }}
@@ -69,7 +71,7 @@ export function AddResumeDialog() {
               className={buttonVariants({ variant: "default", size: "default", className: "w-30" })}
               type="submit"
             >
-              新增保存
+              {t('add.save')}
             </motion.button>
           </DialogFooter>
         </form>

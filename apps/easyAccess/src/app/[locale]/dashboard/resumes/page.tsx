@@ -15,7 +15,7 @@ type Layout = "grid" | "list";
 
 const ResumesPage = () => {
     const [layout, setLayout] = useState<Layout>("grid");
-    const t = useTranslations('dashboard.resumes.tab')
+    const t = useTranslations('dashboard.resumes')
     return (
         <Tabs
             value={layout}
@@ -28,11 +28,11 @@ const ResumesPage = () => {
                 <TabsList>
                     <TabsTrigger value="grid" className="size-8 p-0 sm:h-8 sm:w-auto sm:px-4">
                         <SquaresFour />
-                        <span className="ml-2 hidden sm:block">{t('grid')}</span>
+                        <span className="ml-2 hidden sm:block">{t('tab.grid')}</span>
                     </TabsTrigger>
                     <TabsTrigger value="list" className="size-8 p-0 sm:h-8 sm:w-auto sm:px-4">
                         <List />
-                        <span className="ml-2 hidden sm:block">{t('list')}</span>
+                        <span className="ml-2 hidden sm:block">{t('tab.list')}</span>
                     </TabsTrigger>
                 </TabsList>
 

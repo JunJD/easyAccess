@@ -12,6 +12,13 @@
       "tab": {
         "grid": "Grid",
         "list": "List"
+      },
+      "add": {
+        "title": "Add Resume",
+        "description": "简历名称用于分类,请与其他简历名称不要重复.",
+        "name": "Resume name",
+        "save": "Save",
+        "placeholder": "place input"
       }
     }
   }

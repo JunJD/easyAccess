@@ -1,32 +1,15 @@
 
 import { AnimatePresence, motion } from "framer-motion";
-
 import { BaseCard } from "./_components/base-card";
-import { useResumeStore } from "apps/easyAccess/src/store/resume/store";
-
 import { ResumeCard } from "./_components/resume-card";
-
 import Image from "next/image";
+import useResumes from "apps/easyAccess/src/hooks/useResumes";
 
 export const GridView = () => {
-  // const { resumes, loading } = useResumes();
-  
-const [resumes] = useResumeStore(s => [s.resumeList])
-  const loading = false
+  const {resumes, loading} = useResumes()
 
   return (
     <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-      {/* <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }}>
-        <CreateResumeCard />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0, transition: { delay: 0.1 } }}
-      >
-        <ImportResumeCard />
-      </motion.div> */}
-
       {loading &&
         Array.from({ length: 4 }).map((_, i) => (
           <div

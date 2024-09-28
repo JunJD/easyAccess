@@ -11,3 +11,13 @@ export interface ResumeType  {
     createdAt: Date | string,
     updatedAt: Date | string,
 }
+
+export interface ServiceBasicsType {
+    
+}
+
+// 1.view state
+// 2.service state
+// 1.db schema
+
+// export interface
