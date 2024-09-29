@@ -30,6 +30,7 @@ import { Input } from "apps/easyAccess/libs/ui/input"
 import { Button } from "apps/easyAccess/libs/ui/Button"
 import { useResumeStore } from "apps/easyAccess/src/store/resume/store"
 import { curry } from "lodash-es"
+import BasicInfo from "./feature/basic-info"
 
 interface BasicInfo {
   name: string
@@ -62,11 +63,6 @@ export default function SectionPage() {
   const params = useParams()
   const { section } = params
   const setValue = useResumeStore((state) => curry(state.setResumeValue))(params.id as string);
-  const basicInfo = useResumeStore(state => {
-    console.log(state.activeResumeData.basics, 'state.activeResumeData.basics')
-    return state.activeResumeData.basics
-  })
-
 
   const [workExperience, setWorkExperience] = useState<ExperienceItem[]>([
     { id: "1", company: "", position: "", dateRange: "", summary: "", visible: true }
@@ -85,120 +81,6 @@ export default function SectionPage() {
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
-  )
-
-  const renderBasicInfo = () => (
-    <section id="basics" className="space-y-6">
-      <header className="flex items-center justify-between">
-        <div className="flex items-center gap-x-4">
-          <User size={32} />
-          <h2 className="text-2xl font-bold">基础信息</h2>
-        </div>
-      </header>
-
-      <main className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-1.5 sm:col-span-2">
-          <Label htmlFor="basics.name">全名</Label>
-          <Input
-            id="basics.name"
-            value={basicInfo.name}
-            onChange={(e) => setValue("basics.name", e.target.value)}
-          />
-        </div>
-
-        <div className="space-y-1.5 sm:col-span-2">
-          <Label htmlFor="basics.headline">职位概述</Label>
-          <Input
-            id="basics.headline"
-            value={basicInfo.headline}
-            onChange={(e) =>  setValue("basics.headline", e.target.value)}
-          />
-        </div>
-
-        <div className="space-y-1.5">
-          <Label htmlFor="basics.email">电子邮件</Label>
-          <Input
-            id="basics.email"
-            placeholder="john.doe@example.com"
-            value={basicInfo.email??''}
-            onChange={(e) => setValue("basics.email", e.target.value) }
-          />
-        </div>
-
-        <div className="space-y-1.5">
-          <Label htmlFor="basics.phone">电话</Label>
-          <Input
-            id="basics.phone"
-            placeholder="+86 123 4567 8900"
-            value={basicInfo.phone}
-            onChange={(e) => setValue("basics.phone", e.target.value)}
-          />
-        </div>
-
-        {/* <div className="space-y-1.5">
-          <Label htmlFor="basics.website">个人网站</Label>
-          <Input
-            id="basics.website"
-            placeholder="https://example.com"
-            value={basicInfo.website}
-            onChange={(e) => setBasicInfo({ ...basicInfo, website: e.target.value })}
-          />
-        </div> */}
-
-        <div className="space-y-1.5">
-          <Label htmlFor="basics.location">所在地</Label>
-          <Input
-            id="basics.location"
-            value={basicInfo.location}
-            onChange={(e) => setValue("basics.location", e.target.value) }
-          />
-        </div>
-
-        <div className="space-y-2 sm:col-span-2">
-          <Label>自定义字段</Label>
-          {basicInfo.customFields.map((field, index) => (
-            <div key={index} className="flex space-x-2">
-              <Input
-                placeholder="字段名"
-                value={field.id}
-                onChange={(e) => {
-                  const newFields = [...basicInfo.customFields]
-                  newFields[index].id = e.target.value
-                  setValue("basics.customFields", newFields) 
-                }}
-              />
-              <Input
-                placeholder="值"
-                value={field.value}
-                onChange={(e) => {
-                  const newFields = [...basicInfo.customFields]
-                  newFields[index].value = e.target.value
-                  setValue("basics.customFields", newFields) 
-                }}
-              />
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => {
-                  const newFields = basicInfo.customFields.filter((_, i) => i !== index)
-                  setValue("basics.customFields", newFields) 
-                }}
-              >
-                <Trash size={16} />
-              </Button>
-            </div>
-          ))}
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setValue("basics.customFields", [...basicInfo.customFields, { key: "", value: "" }]) }
-          >
-            <Plus size={16} className="mr-2" />
-            添加自定义字段
-          </Button>
-        </div>
-      </main>
-    </section>
   )
 
   const renderExperienceSection = (type: SectionType) => {
@@ -306,7 +188,7 @@ export default function SectionPage() {
   const renderSection = () => {
     switch (section) {
       case 'basic-info':
-        return renderBasicInfo()
+        return <BasicInfo id={params.id as string}/>
       case 'work-experience':
         return renderExperienceSection('work')
       case 'education':

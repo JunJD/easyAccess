@@ -10,6 +10,7 @@ import { NotIframeProviders } from "../../artboard/providers/notIframe";
 import ArtboardPage from "../../artboard/page";
 import { useParams } from "next/navigation";
 import useBuilder from "apps/easyAccess/src/hooks/useBuilder";
+import { ScrollArea } from "apps/easyAccess/libs/ui/scroll-area";
 
 const BuilderLayout = ({ children }: { children: React.ReactNode }) => {
     const params = useParams()
@@ -42,12 +43,9 @@ const BuilderLayout = ({ children }: { children: React.ReactNode }) => {
                     onDragging={setLeftDragging}
                 />
                 <Panel >
-
                     <main className="w-full absolute inset-0">
                         <NotIframeProviders resume={builderData}>
-                            <ArtboardPage>
-
-                            </ArtboardPage>
+                            <ArtboardPage/>
                         </NotIframeProviders>
                     </main>
                 </Panel>
@@ -57,10 +55,9 @@ const BuilderLayout = ({ children }: { children: React.ReactNode }) => {
                 />
 
                 <Panel defaultSize={0} minSize={25} maxSize={45} className={cn("z-10", !panel.right.isDragging && "transition-[flex]")} onResize={debounce(rightSetSize)}>
-                    <div className="p-4 h-full border-l bg-background overflow-auto">
+                    <ScrollArea className="h-screen p-4 border-l bg-background" hideScrollbar>
                         {children}
-                        {/* {activeTab === "content" && <EditContent />} */}
-                    </div>
+                    </ScrollArea>
                 </Panel>
 
             </PanelGroup>

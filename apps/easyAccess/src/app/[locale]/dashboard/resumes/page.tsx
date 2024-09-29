@@ -1,8 +1,6 @@
 
 'use client'
 import { List, SquaresFour } from "@phosphor-icons/react";
-
-import { motion } from "framer-motion";
 import { useState } from "react";
 
 import { GridView } from "./_layouts/grid";

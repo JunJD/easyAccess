@@ -1,12 +1,12 @@
 import { cn } from "@easy-access/utils"
 import * as React from "react"
 
-
-export interface InputProps
-    extends React.InputHTMLAttributes<HTMLInputElement> { }
+export type InputProps = {
+    hasError?: boolean;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-    ({ className, type, ...props }, ref) => {
+    ({ className, type, hasError = false, ...props }, ref) => {
         return (
             <input
                 type={type}
@@ -15,6 +15,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     "text-sm text-gray-700 placeholder:text-gray-500 dark:text-gray-400 dark:placeholder:text-gray-600",
                     "border border-gray-400 focus-visible:border-transparent",
                     "focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75",
+                    hasError ? "border-error" : "border-border",
                     className
                 )}
                 ref={ref}
