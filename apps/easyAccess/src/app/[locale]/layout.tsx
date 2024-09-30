@@ -6,7 +6,7 @@ import {
   useMessages
 } from 'next-intl'
 import { Space_Grotesk } from 'next/font/google'
-
+import { TooltipProvider } from "apps/easyAccess/libs/ui/tooltip"
 import './globals.css'
 import { ThemeProvider } from './provider/ThemeProvider'
 import NextTopLoader from 'nextjs-toploader'
@@ -66,7 +66,9 @@ export default function RootLayout({
               color='hsl(var(--primary))'
               showSpinner={true}
             />
-            <main className='mx-auto w-full'>{children}</main>
+            <TooltipProvider>
+              <main className='mx-auto w-full'>{children}</main>
+            </TooltipProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

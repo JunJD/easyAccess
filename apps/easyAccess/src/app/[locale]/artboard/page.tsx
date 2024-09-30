@@ -16,10 +16,14 @@ import { SectionsKey } from "../../../types/resume/sections/base";
 
 const ArtboardPage = () => {
   const transformRef = useRef<ReactZoomPanPinchRef>(null);
-  const format = useArtboardStore((state) => {
-    console.log('state.resume',state.resume)
-    return state.resume.metadata.page.format
-  });
+  const resume = useArtboardStore(state => state.resume)
+
+  if (!resume.metadata) {
+    return <>not fund</>
+  }
+
+
+  const format = useArtboardStore((state) => state.resume.metadata.page.format);
   const layout = useArtboardStore((state) => state.resume.metadata.layout);
   const template = useArtboardStore((state) => state.resume.metadata.template);
 

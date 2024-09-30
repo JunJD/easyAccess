@@ -21,5 +21,20 @@
         "placeholder": "请输入"
       }
     }
+  },
+  "builder": {
+    "section": {
+      "add": "新增",
+      "dialog": {
+        "experience": {
+          "company": "公司",
+          "position": "定位",
+          "date or date range": "日期范围",
+          "location": "地点",
+          "website": "网站",
+          "summary": "概览"
+        }
+      }
+    }
   }
 }

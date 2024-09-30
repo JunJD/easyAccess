@@ -31,6 +31,8 @@ import { Button } from "apps/easyAccess/libs/ui/Button"
 import { useResumeStore } from "apps/easyAccess/src/store/resume/store"
 import { curry } from "lodash-es"
 import BasicInfo from "./feature/basic-info"
+import { SectionBase } from "./shared/section-base"
+import Experience from "./feature/work-experience"
 
 interface BasicInfo {
   name: string
@@ -188,9 +190,9 @@ export default function SectionPage() {
   const renderSection = () => {
     switch (section) {
       case 'basic-info':
-        return <BasicInfo id={params.id as string}/>
+        return <BasicInfo id={params.id as string} />
       case 'work-experience':
-        return renderExperienceSection('work')
+        return <Experience />
       case 'education':
         return renderExperienceSection('education')
       case 'projects':

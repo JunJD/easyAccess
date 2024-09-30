@@ -1,4 +1,4 @@
-import { FilterKeys } from "@reactive-resume/utils";
+
 import { z } from "zod";
 
 import { idSchema } from "../shared";
@@ -15,6 +15,7 @@ import { publicationSchema } from "./publication";
 import { referenceSchema } from "./reference";
 import { skillSchema } from "./skill";
 import { volunteerSchema } from "./volunteer";
+import { FilterKeys } from "@easy-access/utils";
 
 // Schema
 export const sectionSchema = z.object({

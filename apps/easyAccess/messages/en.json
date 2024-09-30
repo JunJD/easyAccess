@@ -21,5 +21,20 @@
         "placeholder": "place input"
       }
     }
+  },
+  "builder": {
+    "section": {
+      "add": "Add",
+      "dialog": {
+        "experience": {
+          "company": "Company",
+          "position": "Position",
+          "date or date range": "Date or Date Range",
+          "location": "Location",
+          "website": "Website",
+          "summary": "Summary"
+        }
+      }
+    }
   }
 }

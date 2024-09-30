@@ -12,9 +12,12 @@ export const NotIframeProviders = ({ resume: _resume, children }: NotIframeProvi
     const setResume = useArtboardStore((state) => state.setResume);
 
     useEffect(() => {
-        console.log('NotIframeProviders', _resume);
         _resume && setResume(_resume)
     }, [_resume]);
 
+    if(!resume) {
+        return <>404</>;
+    }
+    
     return <>{resume && children}</>;
 };
