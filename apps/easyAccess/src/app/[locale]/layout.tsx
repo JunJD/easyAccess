@@ -5,16 +5,11 @@ import {
   NextIntlClientProvider,
   useMessages
 } from 'next-intl'
-import { Space_Grotesk } from 'next/font/google'
 import { TooltipProvider } from "apps/easyAccess/libs/ui/tooltip"
 import './globals.css'
 import { ThemeProvider } from './provider/ThemeProvider'
 import NextTopLoader from 'nextjs-toploader'
 
-const space_grotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-space-grotesk'
-})
 export const metadata: Metadata = {
   title: '待定 title',
   description: '待定 description!'
@@ -32,7 +27,7 @@ export default function RootLayout({
     <html
       lang={locale}
       dir={locale === 'ar' || locale == 'fa' ? 'rtl' : 'ltr'}
-      className={`${space_grotesk.variable} scroll-smooth`}
+      className='scroll-smooth'
       suppressHydrationWarning
     >
       <body suppressHydrationWarning={true}>
