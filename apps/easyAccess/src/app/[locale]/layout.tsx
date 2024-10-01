@@ -9,6 +9,7 @@ import { TooltipProvider } from "apps/easyAccess/libs/ui/tooltip"
 import './globals.css'
 import { ThemeProvider } from './provider/ThemeProvider'
 import NextTopLoader from 'nextjs-toploader'
+import { MotionConfig } from 'framer-motion'
 
 export const metadata: Metadata = {
   title: '待定 title',
@@ -61,9 +62,11 @@ export default function RootLayout({
               color='hsl(var(--primary))'
               showSpinner={true}
             />
+            {/* <MotionConfig transition={{ type: 'spring', duration: 0.55 }}> */}
             <TooltipProvider>
               <main className='mx-auto w-full'>{children}</main>
             </TooltipProvider>
+            {/* </MotionConfig> */}
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

@@ -1,5 +1,6 @@
+'use client'
+import { createId } from "@paralleldrive/cuid2";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { defaultExperience, experienceSchema } from "apps/easyAccess/libs/schema";
 import {
     FormControl,
@@ -17,9 +18,6 @@ import { useTranslations } from "next-intl";
 import { SectionBase } from "../../shared/section-base";
 import { useState } from "react";
 
-// import { AiActions } from "@/client/components/ai-actions";
-
-
 
 
 const formSchema = experienceSchema;
@@ -28,7 +26,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 export const ExperienceDialog = ({ isOpen, onOpenChange }: { isOpen: boolean, onOpenChange: (open: boolean) => void }) => {
     const form = useForm<FormValues>({
-        defaultValues: defaultExperience,
+        defaultValues: {...defaultExperience, id: createId()},
         resolver: zodResolver(formSchema),
     });
 
@@ -80,7 +78,7 @@ export const ExperienceDialog = ({ isOpen, onOpenChange }: { isOpen: boolean, on
                         <FormItem>
                             <FormLabel>{t('date or date range')}</FormLabel>
                             <FormControl>
-                                <Input {...field} placeholder={t`March 2023 - Present`} />
+                                <Input {...field} placeholder={'March 2023 - Present'} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

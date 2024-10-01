@@ -1,7 +1,7 @@
 'use client'
 import { ResumeData } from "apps/easyAccess/libs/schema";
 import { useArtboardStore } from "apps/easyAccess/src/store/artboard";
-import { useEffect, PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect } from "react";
 
 interface NotIframeProvidersProps extends PropsWithChildren {
     resume: ResumeData
@@ -14,10 +14,5 @@ export const NotIframeProviders = ({ resume: _resume, children }: NotIframeProvi
     useEffect(() => {
         _resume && setResume(_resume)
     }, [_resume]);
-
-    if(!resume) {
-        return <>404</>;
-    }
-    
     return <>{resume && children}</>;
 };
