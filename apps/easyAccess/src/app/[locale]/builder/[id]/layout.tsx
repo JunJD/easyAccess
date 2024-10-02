@@ -55,7 +55,7 @@ const BuilderLayout = ({ children }: { children: React.ReactNode }) => {
                 />
 
                 <Panel defaultSize={0} minSize={25} maxSize={45} className={cn("z-10", !panel.right.isDragging && "transition-[flex]")} onResize={debounce(rightSetSize)}>
-                    <ScrollArea className="h-screen p-4 border-l bg-background" hideScrollbar>
+                    <ScrollArea className="h-screen border-l bg-background" hideScrollbar>
                         {children}
                     </ScrollArea>
                 </Panel>

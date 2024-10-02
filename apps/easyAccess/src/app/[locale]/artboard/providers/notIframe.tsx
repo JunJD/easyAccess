@@ -14,5 +14,5 @@ export const NotIframeProviders = ({ resume: _resume, children }: NotIframeProvi
     useEffect(() => {
         _resume && setResume(_resume)
     }, [_resume]);
-    return <>{resume && children}</>;
+    return <>{resume ? children : <div></div>}</>;
 };

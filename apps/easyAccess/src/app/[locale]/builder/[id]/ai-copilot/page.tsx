@@ -1,30 +1,74 @@
 "use client"
 
 import React, { useState, useRef, useEffect } from 'react'
-import { useCopilotChat } from "@copilotkit/react-core"
-import { Role, TextMessage } from "@copilotkit/runtime-client-gql"
+import { UseCopilotChatReturn, useCopilotChat } from "@copilotkit/react-core"
+import { Message, Role, TextMessage } from "@copilotkit/runtime-client-gql"
 import { CopilotChat } from "@copilotkit/react-ui"
 import { ScrollArea } from "apps/easyAccess/libs/ui/scroll-area"
 import { Input } from "apps/easyAccess/libs/ui/input"
 import { Button } from "apps/easyAccess/libs/ui/Button"
-import { Tooltip } from "apps/easyAccess/libs/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "apps/easyAccess/libs/ui/tooltip"
 import { Popover, PopoverTrigger, PopoverContent } from "apps/easyAccess/libs/ui/popover"
 import { ChatTeardropDots, PaperPlaneRight, User, Robot, HeadCircuit, Copy, Trash, ArrowClockwise, PencilSimple, DotsThreeVertical } from "@phosphor-icons/react"
-import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import remarkGfm from 'remark-gfm'
+import MarkdownIt from 'markdown-it'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/vs2015.css'
+import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from "apps/easyAccess/libs/ui/use-toast"
 import IconWithFallback from '../../_component/IconWithFallback'
+import { CopilotChatIcons } from '@copilotkit/react-ui/dist/components/chat/ChatContext'
 
-const customIcons = {
+interface FixUseCopilotChatReturn extends UseCopilotChatReturn {
+
+  visibleMessages: localMessage[];
+}
+
+// Types
+interface CustomIcon extends CopilotChatIcons {
+  chat: JSX.Element
+  user: JSX.Element
+  ai: JSX.Element
+}
+
+interface CustomLabels {
+  title: string
+  initial: string
+  placeholder: string
+  sendButtonLabel: string
+  responseButton: string
+}
+
+type localMessage = Message & TextMessage
+
+interface MessageActionsProps {
+  onCopy: () => void
+  onDelete: () => void
+  onRetry: () => void
+  onEdit: () => void
+}
+
+interface CustomMessageProps {
+  messages: localMessage[]
+  inProgress: boolean
+  onMessageAction: (action: string, index: number) => void
+}
+
+interface CustomInputProps {
+  inProgress: boolean
+  onSend: (message: string, editIndex?: number | null) => void
+  editingMessage: { content: string; index: number } | null
+  setEditingMessage: React.Dispatch<React.SetStateAction<{ content: string; index: number } | null>>
+}
+
+// Constants
+const customIcons: CustomIcon = {
   chat: <ChatTeardropDots weight="fill" className="w-6 h-6" />,
-  send: <PaperPlaneRight weight="fill" className="w-5 h-5" />,
+  sendIcon: <PaperPlaneRight weight="fill" className="w-5 h-5" />,
   user: <User weight="fill" className="w-6 h-6" />,
   ai: <Robot weight="fill" className="w-6 h-6" />,
 }
 
-const customLabels = {
+const customLabels: CustomLabels = {
   title: "AI助手",
   initial: "你好！👋 我是你的AI助手。有什么我可以帮助你的吗？",
   placeholder: "输入你的问题...",
@@ -32,7 +76,19 @@ const customLabels = {
   responseButton: "生成回复",
 }
 
-function MessageActions({ onCopy, onDelete, onRetry, onEdit }) {
+// Markdown configuration
+const md = new MarkdownIt({
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(str, { language: lang }).value
+      } catch (__) { }
+    }
+    return '' // use external default escaping
+  }
+})
+
+function MessageActions({ onCopy, onDelete, onRetry, onEdit }: MessageActionsProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -64,8 +120,8 @@ function MessageActions({ onCopy, onDelete, onRetry, onEdit }) {
   )
 }
 
-function CustomMessage({ messages, inProgress, onMessageAction }) {
-  const scrollAreaRef = useRef(null)
+function CustomMessage({ messages, inProgress, onMessageAction }: CustomMessageProps) {
+  const scrollAreaRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -74,68 +130,56 @@ function CustomMessage({ messages, inProgress, onMessageAction }) {
   }, [messages])
 
   return (
-    <ScrollArea ref={scrollAreaRef} className="flex-1 p-2 space-y-4">
-      {messages.map((msg, index) => (
-        <div key={index} className={`mb-4 flex group ${msg.role === Role.User ? 'justify-end' : 'justify-start'}`}>
-          <div className={`flex items-start space-x-2 max-w-full ${msg.role === Role.User ? 'flex-row-reverse space-x-reverse' : ''}`}>
-            <div className={`flex-shrink-0 p-2 rounded-full ${msg.role === Role.User ? 'bg-blue-500' : 'bg-gray-300'}`}>
-              {msg.role === Role.User ? customIcons.user : customIcons.ai}
+    <ScrollArea ref={scrollAreaRef} className="flex-1 p-4 space-y-4">
+      <AnimatePresence>
+        {messages.map((msg, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className={`mb-4 flex group ${msg.role === Role.User ? 'justify-end' : 'justify-start'}`}
+          >
+            <div className={`flex items-start space-x-2 max-w-full ${msg.role === Role.User ? 'flex-row-reverse space-x-reverse' : ''}`}>
+              <div className={`flex-shrink-0 p-2 rounded-full ${msg.role === Role.User ? 'bg-blue-500' : 'bg-gray-300'}`}>
+                {msg.role === Role.User ? customIcons.user : customIcons.ai}
+              </div>
+              <div className={`p-4 rounded-lg ${msg.role === Role.User ? 'bg-blue-100' : 'bg-gray-100'} overflow-x-auto max-w-[calc(100%-4rem)] shadow-md`}>
+                <div
+                  className="text-sm prose dark:prose-invert max-w-none"
+                  dangerouslySetInnerHTML={{ __html: md.render(msg.content) }}
+                />
+                <p className="text-xs text-gray-500 mt-2">{new Date().toLocaleTimeString()}</p>
+              </div>
+              <MessageActions
+                onCopy={() => onMessageAction('copy', index)}
+                onDelete={() => onMessageAction('delete', index)}
+                onRetry={() => onMessageAction('retry', index)}
+                onEdit={() => onMessageAction('edit', index)}
+              />
             </div>
-            <div className={`p-3 rounded-lg ${msg.role === Role.User ? 'bg-blue-100' : 'bg-gray-100'} overflow-x-auto max-w-[calc(100%-4rem)]`}>
-              <ReactMarkdown
-                className="text-sm prose dark:prose-invert max-w-none"
-                remarkPlugins={[remarkGfm]}
-                components={{
-                  code({node, inline, className, children, ...props}) {
-                    const match = /language-(\w+)/.exec(className || '')
-                    return !inline && match ? (
-                      <SyntaxHighlighter
-                        style={vscDarkPlus}
-                        language={match[1]}
-                        PreTag="div"
-                        {...props}
-                      >
-                        {String(children).replace(/\n$/, '')}
-                      </SyntaxHighlighter>
-                    ) : (
-                      <code className={className} {...props}>
-                        {children}
-                      </code>
-                    )
-                  },
-                  table: ({children, ...props}) => (
-                    <div className="overflow-x-auto">
-                      <table {...props}>{children}</table>
-                    </div>
-                  ),
-                }}
-              >
-                {msg.content}
-              </ReactMarkdown>
-              <p className="text-xs text-gray-500 mt-1">{new Date().toLocaleTimeString()}</p>
-            </div>
-            <MessageActions
-              onCopy={() => onMessageAction('copy', index)}
-              onDelete={() => onMessageAction('delete', index)}
-              onRetry={() => onMessageAction('retry', index)}
-              onEdit={() => onMessageAction('edit', index)}
-            />
-          </div>
-        </div>
-      ))}
+          </motion.div>
+        ))}
+      </AnimatePresence>
       {inProgress && (
-        <div className="flex justify-start">
-          <div className="flex items-center space-x-2 bg-gray-100 p-3 rounded-lg">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="flex justify-start"
+        >
+          <div className="flex items-center space-x-2 bg-gray-100 p-3 rounded-lg shadow-md">
             <HeadCircuit className="w-5 h-5 animate-spin" />
             <p className="text-sm">AI正在思考...</p>
           </div>
-        </div>
+        </motion.div>
       )}
     </ScrollArea>
   )
 }
 
-function CustomInput({ inProgress, onSend, editingMessage, setEditingMessage }) {
+function CustomInput({ inProgress, onSend, editingMessage, setEditingMessage }: CustomInputProps) {
   const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
@@ -157,7 +201,7 @@ function CustomInput({ inProgress, onSend, editingMessage, setEditingMessage }) 
   }
 
   return (
-    <div className="flex items-center space-x-2 p-2 bg-gray-50 border-t">
+    <div className="flex items-center space-x-2 p-4 bg-gray-50 border-t">
       <Input
         placeholder={editingMessage ? "编辑消息..." : customLabels.placeholder}
         value={inputValue}
@@ -165,11 +209,13 @@ function CustomInput({ inProgress, onSend, editingMessage, setEditingMessage }) 
         onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
         className="flex-1"
       />
+
       <Tooltip content={inProgress ? "AI正在回复" : "发送"}>
         <Button size="icon" onClick={handleSend} disabled={inProgress || !inputValue.trim()}>
           <IconWithFallback icon={inProgress ? HeadCircuit : PaperPlaneRight} className="h-4 w-4" />
         </Button>
       </Tooltip>
+
     </div>
   )
 }
@@ -179,7 +225,7 @@ export default function CustomCopilotChat() {
     visibleMessages,
     appendMessage,
     deleteMessage,
-    updateMessage,
+    setMessages,
     isLoading,
   } = useCopilotChat({
     id: "custom-chat",
@@ -189,11 +235,18 @@ export default function CustomCopilotChat() {
         role: Role.Assistant,
       }),
     ],
-  })
+  }) as FixUseCopilotChatReturn
+  console.log('visibleMessages', visibleMessages)
+  const updateMessage = (index: number, newMessage: localMessage) => {
 
-  const [editingMessage, setEditingMessage] = useState(null)
+    const updatedMessages = [...visibleMessages];
+    updatedMessages[index] = newMessage;
+    setMessages(updatedMessages)
+  }
 
-  const handleSubmitMessage = async (message, editIndex = null) => {
+  const [editingMessage, setEditingMessage] = useState<{ content: string; index: number } | null>(null)
+
+  const handleSubmitMessage = async (message: string, editIndex: number | null = null) => {
     try {
       if (editIndex !== null) {
         await updateMessage(editIndex, new TextMessage({
@@ -222,7 +275,7 @@ export default function CustomCopilotChat() {
     }
   }
 
-  const handleMessageAction = async (action, index) => {
+  const handleMessageAction = async (action: string, index: number) => {
     try {
       switch (action) {
         case 'copy':
@@ -233,7 +286,7 @@ export default function CustomCopilotChat() {
           })
           break
         case 'delete':
-          await deleteMessage(index)
+          await deleteMessage(index + '')
           toast({
             title: "已删除",
             description: "消息已成功删除。",
@@ -267,10 +320,10 @@ export default function CustomCopilotChat() {
   }
 
   return (
-    <div className="h-full w-full bg-white flex flex-col">
-      <div className="p-2 bg-gray-50 border-b flex items-center space-x-2">
+    <div className="h-full w-full bg-white flex flex-col rounded-lg shadow-lg overflow-hidden h-screen">
+      <div className="p-4 bg-gray-50 border-b flex items-center space-x-2">
         {customIcons.chat}
-        <h2 className="text-lg font-semibold">{customLabels.title}</h2>
+        <h2 className="text-xl font-semibold">{customLabels.title}</h2>
       </div>
       <CopilotChat
         icons={customIcons}
