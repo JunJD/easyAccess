@@ -17,7 +17,7 @@ const BasicInfo: FC<{ id: string }> = ({ id }) => {
 
     const form = useForm({
         resolver: zodResolver(basicsSchema),
-        defaultValues: basicInfo,
+        values: basicInfo,
     });
 
     useEffect(()=>{
@@ -25,7 +25,7 @@ const BasicInfo: FC<{ id: string }> = ({ id }) => {
             ...basicInfo,
             ...form.getValues()
         })
-    }, form.watch(['name', 'email', 'phone', 'location']))
+    }, form.watch(['name', 'email', 'headline', 'phone', 'location']))
 
     return (
         <section id="basics" className="space-y-6">

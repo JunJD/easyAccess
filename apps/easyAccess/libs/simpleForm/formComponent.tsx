@@ -10,6 +10,7 @@ import {
 } from "apps/easyAccess/libs/ui/form";
 import React from "react";
 import { cn } from "@easy-access/utils";
+import { RichInput } from "../ui";
 
 export default function FormComponent(componentProps: any) {
     console.log('componentProps', componentProps);
@@ -33,7 +34,7 @@ export default function FormComponent(componentProps: any) {
                             <FormItem className={usingClass}>
                                 <FormLabel className="w-1/6 font-bold">
                                     {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-                                    {componentProps.label}：
+                                    {componentProps.label}
                                 </FormLabel>
                                 <FormControl>
                                     <Input
@@ -56,7 +57,7 @@ export default function FormComponent(componentProps: any) {
                 Component = (
                     <FormItem className={usingClass}>
                         <FormLabel className="w-1/6 font-bold">
-                            {componentProps.label}：
+                            {componentProps.label}
                         </FormLabel>
                         <FormControl>
                             <Select
@@ -69,6 +70,33 @@ export default function FormComponent(componentProps: any) {
                     </FormItem>
                 );
                 break;
+            case 'RichInput':
+                Component = (
+                    <FormField
+                        name="summary"
+                        control={componentProps.form.control}
+                        render={({ field }) => (
+                            <FormItem className="sm:col-span-2">
+                                <FormLabel>{componentProps.label}</FormLabel>
+                                <FormControl>
+                                    <RichInput
+                                        {...field}
+                                        content={field.value}
+                                        footer={(editor) => (
+                                            null
+                                        )}
+                                        onChange={(value) => {
+                                            setFormValue(componentProps.name, value)
+                                            // field.onChange(value);
+                                        }}
+                                        defaultValue={componentProps.form.getValues()[componentProps.name]}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                )
             default:
                 break;
         }
