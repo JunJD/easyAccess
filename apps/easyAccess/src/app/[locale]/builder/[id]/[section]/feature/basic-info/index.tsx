@@ -18,7 +18,6 @@ const BasicInfo: FC<{ id: string }> = ({ id }) => {
     const form = useForm({
         resolver: zodResolver(basicsSchema),
         defaultValues: basicInfo,
-        values: basicInfo,
     });
 
     useEffect(()=>{

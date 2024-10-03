@@ -29,6 +29,9 @@ dependencies:
   '@dnd-kit/utilities':
     specifier: ^3.2.2
     version: 3.2.2(react@18.3.1)
+  '@ebay/nice-modal-react':
+    specifier: ^1.2.13
+    version: 1.2.13(react-dom@18.3.1)(react@18.3.1)
   '@headlessui/react':
     specifier: ^2.1.5
     version: 2.1.5(react-dom@18.3.1)(react@18.3.1)
@@ -269,6 +272,9 @@ dependencies:
   prosemirror-state:
     specifier: ^1.4.3
     version: 1.4.3
+  rc-modal-sheet:
+    specifier: ^0.3.2
+    version: 0.3.2(@radix-ui/react-dialog@1.1.1)(clsx@2.1.1)(framer-motion@11.3.30)(tailwind-merge@2.5.2)(vaul@0.9.2)
   react:
     specifier: 18.3.1
     version: 18.3.1
@@ -2627,6 +2633,16 @@ packages:
     dependencies:
       react: 18.3.1
       tslib: 2.7.0
+    dev: false
+
+  /@ebay/nice-modal-react@1.2.13(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-jx8xIWe/Up4tpNuM02M+rbnLoxdngTGk3Y8LjJsLGXXcSoKd/+eZStZcAlIO/jwxyz/bhPZnpqPJZWAmhOofuA==}
+    peerDependencies:
+      react: '>16.8.0'
+      react-dom: '>16.8.0'
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /@emnapi/core@1.2.0:
@@ -17184,6 +17200,22 @@ packages:
       http-errors: 2.0.0
       iconv-lite: 0.4.24
       unpipe: 1.0.0
+
+  /rc-modal-sheet@0.3.2(@radix-ui/react-dialog@1.1.1)(clsx@2.1.1)(framer-motion@11.3.30)(tailwind-merge@2.5.2)(vaul@0.9.2):
+    resolution: {integrity: sha512-V6q4+xpeIj9VRL/44zCaXCkRLjVZ1iSYUuyiqveD24gQFy41s9GwjTrMoZ0T6Xg54I2wzuXRUITRH1hrHIjF+A==}
+    peerDependencies:
+      '@radix-ui/react-dialog': ^1
+      clsx: '*'
+      framer-motion: ^11
+      tailwind-merge: ^2
+      vaul: ^0.9.0
+    dependencies:
+      '@radix-ui/react-dialog': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)
+      clsx: 2.1.1
+      framer-motion: 11.3.30(react-dom@18.3.1)(react@18.3.1)
+      tailwind-merge: 2.5.2
+      vaul: 0.9.2(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)
+    dev: false
 
   /react-beautiful-dnd@13.1.1(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-0Lvs4tq2VcrEjEgDXHjT98r+63drkKEgqyxdA7qD3mvKwga6a5SscbdLPO2IExotU1jW8L0Ksdl0Cj2AF67nPQ==}

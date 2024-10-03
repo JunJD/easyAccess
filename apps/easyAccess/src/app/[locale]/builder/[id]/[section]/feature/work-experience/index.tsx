@@ -1,4 +1,5 @@
 'use client'
+import NiceModal from '@ebay/nice-modal-react/lib/esm';
 import { createId } from "@paralleldrive/cuid2";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { defaultExperience, experienceSchema } from "apps/easyAccess/libs/schema";
@@ -17,7 +18,7 @@ import { SectionDialog } from "../../shared/section-dialog";
 import { useTranslations } from "next-intl";
 import { SectionBase } from "../../shared/section-base";
 import { useState } from "react";
-
+import Modal from './modal'
 
 
 const formSchema = experienceSchema;
@@ -143,14 +144,16 @@ export const ExperienceDialog = ({ isOpen, onOpenChange }: { isOpen: boolean, on
 const Experience = () => {
     const [isOpen, setIsOpen] = useState(false);
     const onOpen = () => {
-        setIsOpen(true);
+         // Show a modal with arguments passed to the component as props
+        NiceModal.show(Modal, { name: 'Nate' })
+        // setIsOpen(true);
     }
     const onOpenChange = (open: boolean) => {
         setIsOpen(open);
     }
     return (
         <>
-            <ExperienceDialog isOpen={isOpen} onOpenChange={onOpenChange} />
+            {/* <ExperienceDialog isOpen={isOpen} onOpenChange={onOpenChange} /> */}
             <SectionBase open={onOpen} sectionKey='experience' title={() => '工作经历'} description={() => '添加你的工作经历'} />
         </>
     )

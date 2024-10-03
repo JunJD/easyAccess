@@ -8,8 +8,8 @@ import {
 import { TooltipProvider } from "apps/easyAccess/libs/ui/tooltip"
 import './globals.css'
 import { ThemeProvider } from './provider/ThemeProvider'
+import ModalProvider from './provider/ModalProvider'
 import NextTopLoader from 'nextjs-toploader'
-import { MotionConfig } from 'framer-motion'
 
 export const metadata: Metadata = {
   title: '待定 title',
@@ -64,7 +64,9 @@ export default function RootLayout({
             />
             {/* <MotionConfig transition={{ type: 'spring', duration: 0.55 }}> */}
             <TooltipProvider>
-              <main className='mx-auto w-full'>{children}</main>
+              <ModalProvider>
+                <main className='mx-auto w-full'>{children}</main>
+              </ModalProvider>
             </TooltipProvider>
             {/* </MotionConfig> */}
           </NextIntlClientProvider>

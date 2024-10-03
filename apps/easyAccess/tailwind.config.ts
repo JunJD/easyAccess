@@ -10,6 +10,7 @@ const config = {
       '{libs,src,components,app}/**/*!(*.stories|*.spec).{ts,tsx,html}'
     ),
     ...createGlobPatternsForDependencies(__dirname),
+    "./node_modules/rc-modal-sheet/**/*.js", // Add this line
   ],
   prefix: '',
   theme: {
