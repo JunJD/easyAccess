@@ -38,7 +38,6 @@ export const SectionBase = <T extends SectionItem>({ sectionKey, title, descript
     const setValue = useResumeStore((state) => curry(state.setResumeValue))(params.id as string);
 
     const section = useResumeStore((state) => {
-        console.log('get(state.activeResumeData.sections, sectionKey)', state.activeResumeData.sections, sectionKey)
         return get(state.activeResumeData.sections, sectionKey)
     }) as SectionWithItem<T>;
 

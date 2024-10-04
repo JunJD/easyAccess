@@ -6,3 +6,5 @@ export * from './lib/template';
 export * from './lib/uuid';
 export * from './lib/counterId';
 export * from './lib/types';
+export * from './lib/string';
+export * from './lib/number';

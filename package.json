@@ -116,6 +116,7 @@
     "tailwindcss-radix": "^3.0.4",
     "tippy.js": "^6.3.7",
     "tslib": "^2.3.0",
+    "unique-names-generator": "^4.7.1",
     "use-keyboard-shortcut": "^1.1.6",
     "usehooks-ts": "^3.1.0",
     "utility-types": "^3.11.0",

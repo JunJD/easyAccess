@@ -14,12 +14,12 @@ import { createId } from "@paralleldrive/cuid2";
 import { produce } from "immer";
 
 interface ModalProps {
-    name: string;
+    isEdit?: boolean;
 }
 
 type ExperienceValues = z.infer<typeof experienceSchema>;
 
-export default NiceModal.create(({ name }: ModalProps) => {
+export default NiceModal.create(({ isEdit }: ModalProps) => {
     const modal = useModal();
     const handleOpenChange = (open: boolean) => {
         open ? modal.show() : modal.hide();
