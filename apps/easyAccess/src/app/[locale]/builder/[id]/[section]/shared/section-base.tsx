@@ -165,7 +165,8 @@ import { curry, get } from "lodash-es";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import DraggableList from "../_component/DraggableList";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
+import { Tooltip } from "apps/easyAccess/libs/ui/tooltip";
 
 type Props<T extends SectionItem> = {
     sectionKey: SectionKey;
@@ -226,25 +227,57 @@ export const SectionBase = <T extends SectionItem>({ sectionKey, getTitle, getDe
 
     }
 
+    const [isHovered, setIsHovered] = useState('')
 
     const data = useMemo(() => {
         return section.items.map((item) => {
             const title = getTitle(item as T);
-            const description = getDescription?.(item as T);
+            const description = getDescription?.(item as T) ?? 'description';
+            const icons = renderIcons(item as T)
+
+            console.log(item)
+
             return {
                 id: item.id,
-                icons: renderIcons(item as T),
                 content: (
-                    <div
-                        className="flex-1 cursor-pointer p-3 hover:bg-secondary/20 active:bg-secondary/40 transition-colors duration-100"
+                    <div className="flex items-center justify-between"
+                        onMouseEnter={() => setIsHovered(item.id)}
+                        onMouseLeave={() => setIsHovered('')}
                     >
-                        <h4 className="font-medium leading-tight">{title}</h4>
-                        {description && <p className="text-xs leading-snug text-muted-foreground mt-0.5">{description}</p>}
+                        <div
+                            className="cursor-pointer p-3 hover:bg-secondary/20 active:bg-secondary/40 transition-colors duration-100"
+                            style={{ width: `calc(100% - 36px * ${isHovered === item.id ? icons.length : 0})`, transition: `width 0.5s ease-in-out` }}
+                        >
+                            <Tooltip content={title}>
+                                <h4 className="font-medium leading-tight truncate">{title}</h4>
+                            </Tooltip>
+                            <Tooltip content={description}>
+                                <p className="text-xs leading-snug text-muted-foreground mt-0.5 truncate h-[16.5px]">
+                                    {description}
+                                </p>
+                            </Tooltip>
+                        </div>
+                        <AnimatePresence>
+                            {isHovered === item.id && (
+                                icons.map((icon, index) => (
+                                    <motion.div
+                                        className="h-8 w-8 flex items-center justify-center bg-background mr-1"
+                                        initial={{ width: 0, opacity: 0 }}
+                                        animate={{ width: 'auto', opacity: 1 }}
+                                        exit={{ width: 0, opacity: 0 }}
+                                        transition={{ duration: 0.2, ease: "easeInOut", delay: index * 0.1 }}
+                                        key={index}
+                                    >
+                                        {icon}
+                                    </motion.div>
+                                ))
+                            )}
+                        </AnimatePresence>
                     </div>
                 )
             }
         })
-    }, [section])
+    }, [section, isHovered])
 
     return (
         <motion.section
@@ -252,7 +285,7 @@ export const SectionBase = <T extends SectionItem>({ sectionKey, getTitle, getDe
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="grid gap-y-6"
+            className="flex gap-y-6 w-full flex-col"
         >
             <header className="flex items-center justify-between">
                 <div className="flex items-center gap-x-4">
@@ -262,7 +295,7 @@ export const SectionBase = <T extends SectionItem>({ sectionKey, getTitle, getDe
             </header>
 
 
-            <main className="grid gap-4">
+            <main className="flex flex-col w-full gap-4">
                 <DraggableList
                     data={data} onItemsChange={onItemsChange}
                 >

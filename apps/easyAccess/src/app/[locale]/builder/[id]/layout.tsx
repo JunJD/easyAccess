@@ -45,7 +45,7 @@ const BuilderLayout = ({ children }: { children: React.ReactNode }) => {
                 <Panel >
                     <main className="w-full absolute inset-0">
                         <NotIframeProviders resume={builderData}>
-                            <ArtboardPage/>
+                            <ArtboardPage />
                         </NotIframeProviders>
                     </main>
                 </Panel>
