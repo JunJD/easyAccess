@@ -1,6 +1,10 @@
 import NiceModal from '@ebay/nice-modal-react/lib/esm';
 import { SectionBase } from "../../shared/section-base";
 import Modal from './modal'
+import { experienceSchema } from 'apps/easyAccess/libs/schema';
+import { z } from 'zod';
+// Type
+export type Experience = z.infer<typeof experienceSchema>;
 const Experience = () => {
     // (type: "create" | "update" | "duplicate", params: { sectionKey: string; item?: T }) => void;
     const onOpen = (type: "create" | "update" | "duplicate", params: { sectionKey: string; item?: any }) => {
@@ -9,12 +13,13 @@ const Experience = () => {
         }
         console.log('type==>', type)
     }
+
     return (
-        <SectionBase
+        <SectionBase<Experience>
             open={onOpen}
             sectionKey='experience'
-            title={() => '工作经历'}
-            description={() => '添加你的工作经历'}
+            getTitle={(item) => item.company}
+            getDescription={(item) => item.position}
         />
     )
 }
