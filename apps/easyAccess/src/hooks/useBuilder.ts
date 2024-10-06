@@ -34,7 +34,8 @@ const useBuilderWithSection = <T extends Sections[keyof Sections]>(builderId: st
             }),
         );
     }
-    const updateSectionItem = (index: number, value: T) => {
+    const updateSectionItem = (value: SectionItem) => {
+        const index = (section as SectionWithItem).items.findIndex((item) => item.id === value.id);
         setValue(
             `sections.${sectionKey}.items.${index}`,
             value,

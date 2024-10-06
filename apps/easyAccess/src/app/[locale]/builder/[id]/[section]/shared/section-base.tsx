@@ -69,7 +69,7 @@ type Props<T extends SectionItem> = {
     sectionKey: SectionKey;
     getTitle: (item: T) => string;
     getDescription?: (item: T) => string | undefined;
-    open: (type: "create" | "update" | "duplicate", params: { sectionKey: string; item?: T }) => void;
+    open: (type: "create" | "update", params: { item?: T }) => void;
 };
 
 export const SectionBase = <T extends SectionItem>({ sectionKey, getTitle, getDescription, open }: Props<T>) => {
@@ -83,43 +83,42 @@ export const SectionBase = <T extends SectionItem>({ sectionKey, getTitle, getDe
     }) as SectionWithItem<T>;
 
     const onCreate = () => {
-        open("create", { sectionKey });
+        open("create", {});
     };
 
 
     const renderIcons = useCallback((item: T) => {
         return [
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={onToggleVisibility}>
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => { handleToggleVisibility(item) }}>
                 {item.visible ? <Eye size={14} /> : <EyeSlash size={14} />}
             </Button>,
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={handleEdit}>
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={()=>{ handleEdit(item) }}>
                 <PencilSimple size={14} />
             </Button>,
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => { onDuplicate(item) }}>
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => { handleDuplicate(item) }}>
                 <CopySimple size={14} />
             </Button>,
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => { onDelete(item) }}>
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => { handleDelete(item) }}>
                 <TrashSimple size={14} />
             </Button>
         ]
     }, [section])
 
-    const onToggleVisibility = () => {
+    const handleToggleVisibility = (item: T) => {
 
     }
 
-    const handleEdit = () => {
-
+    const handleEdit = (item: T) => {
+        open("update", { item });
     }
 
-    const onDuplicate = (items: T) => {
+    const handleDuplicate = (items: T) => {
         const duplicateItem = { ...items, id: createId() };
         setValue(`sections.${sectionKey}.items`, [...section.items, duplicateItem]);
     }
 
-    const onDelete = (item: T) => {
+    const handleDelete = (item: T) => {
         const filterList = section.items.filter((i) => {
-            console.log(i.id, item.id)
             return i.id !== item.id
         });
         setValue(`sections.${sectionKey}.items`, filterList);

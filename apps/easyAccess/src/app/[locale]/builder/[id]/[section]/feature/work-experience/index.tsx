@@ -21,13 +21,19 @@ const Experience = () => {
 
 
     const {
-        addSectionItem
+        addSectionItem,
+        updateSectionItem
     } = useBuilderWithSection(params.id as string, sectionKey)
 
-    const onOpen = (type: "create" | "update" | "duplicate", params: { sectionKey: string; item?: any }) => {
+    const onOpen = (type: "create" | "update", params: { item?: ExperienceValues }) => {
         if (type === 'create') {
             NiceModal.show<Exclude<ExperienceValues, 'id'>, any, any>(Modal, { isEdit: false, form, formSchema }).then(res => {
                 addSectionItem(res)
+            })
+        } else if (type === 'update') {
+            form.reset({ ...params.item })
+            NiceModal.show<ExperienceValues, any, any>(Modal, { isEdit: true, form, formSchema }).then(res => {
+                updateSectionItem(res)
             })
         }
         console.log('type==>', type)
