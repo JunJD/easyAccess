@@ -9,7 +9,7 @@ import { useResumeStore } from "apps/easyAccess/src/store/resume/store";
 import { curry, get } from "lodash-es";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import DraggableList from "../_component/DraggableList";
+import DraggableList, { Item } from "../_component/DraggableList";
 import { useCallback, useMemo } from "react";
 import { Tooltip } from "apps/easyAccess/libs/ui/tooltip";
 import useMouseHoverState from "apps/easyAccess/src/hooks/useMouseHoverState";
@@ -92,7 +92,7 @@ export const SectionBase = <T extends SectionItem>({ sectionKey, getTitle, getDe
             <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => { handleToggleVisibility(item) }}>
                 {item.visible ? <Eye size={14} /> : <EyeSlash size={14} />}
             </Button>,
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={()=>{ handleEdit(item) }}>
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => { handleEdit(item) }}>
                 <PencilSimple size={14} />
             </Button>,
             <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => { handleDuplicate(item) }}>
@@ -124,16 +124,19 @@ export const SectionBase = <T extends SectionItem>({ sectionKey, getTitle, getDe
         setValue(`sections.${sectionKey}.items`, filterList);
     }
 
-    const onItemsChange = () => {
 
+    const onItemsChange = (items: Item[]) => {
+        const sortedItems = items.map((item) => {
+            return section.items.find(i => i.id === item.id)
+        })
+        setValue(`sections.${sectionKey}.items`, sortedItems);
     }
 
-    const data = useMemo(() => {
+    const data: Item[] = useMemo(() => {
         return section.items.map((item) => {
             const title = getTitle(item as T);
             const description = getDescription?.(item as T) ?? 'description';
             const icons = renderIcons(item as T)
-
 
             return {
                 id: item.id,

@@ -17,10 +17,9 @@ import {
 } from '@dnd-kit/sortable';
 
 import { DraggableItem } from './DraggableItem';
-interface Item {
+export interface Item {
     id: string
-    content: React.ReactNode | string
-    icons?: React.ReactNode[]
+    content: React.ReactNode
 }
 
 interface DraggableListProps {
