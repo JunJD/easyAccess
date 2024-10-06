@@ -105,7 +105,13 @@ export const SectionBase = <T extends SectionItem>({ sectionKey, getTitle, getDe
     }, [section])
 
     const handleToggleVisibility = (item: T) => {
-
+        setValue(`sections.${sectionKey}.items`, section.items.map(i => {
+            if (i.id === item.id) {
+                return { ...i, visible: !i.visible }
+            }
+            return i
+        })
+        );
     }
 
     const handleEdit = (item: T) => {
