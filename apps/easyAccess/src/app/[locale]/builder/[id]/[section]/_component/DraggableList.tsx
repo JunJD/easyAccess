@@ -67,7 +67,7 @@ export default function DraggableList(props: DraggableListProps) {
                 strategy={verticalListSortingStrategy}
             >
                 {items.map(item => (
-                    <DraggableItem key={item.id} id={item.id} renderIcons={item.icons}>
+                    <DraggableItem key={item.id} id={item.id}>
                         {item.content}
                     </DraggableItem>
                 ))}

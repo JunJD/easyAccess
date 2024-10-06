@@ -1,4 +1,20 @@
-export const formSchema = [
+export interface FormSchema {
+    name: string;
+    type: string;
+    props: any;
+    layout: string;
+    panel: {
+        icon: string;
+        label: string;
+    };
+    label: string;
+    chosen: boolean;
+    footer?: string;
+    suffix?: string;
+    colon?: boolean
+}
+
+export const formSchema: FormSchema[] = [
     {
         name: "company",
         type: "Input",
