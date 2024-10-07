@@ -1,22 +1,12 @@
 import { Label } from "apps/easyAccess/libs/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "apps/easyAccess/libs/ui/select";
 import { Slider } from "apps/easyAccess/libs/ui/slider";
+import { TemplateSection } from "./feature/template";
 
 const TemplateAndLayoutPage = () => (
-    <div className="space-y-8">
+    <div className="space-y-8 p-4">
         <section>
-            <h2 className="text-2xl font-bold mb-4">Template Selection</h2>
-            <Select>
-                <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Choose a template" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="modern">Modern</SelectItem>
-                    <SelectItem value="classic">Classic</SelectItem>
-                    <SelectItem value="minimalist">Minimalist</SelectItem>
-                    <SelectItem value="creative">Creative</SelectItem>
-                </SelectContent>
-            </Select>
+            <TemplateSection />
         </section>
         <section>
             <h2 className="text-2xl font-bold mb-4">Font Settings</h2>

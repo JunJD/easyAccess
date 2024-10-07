@@ -35,6 +35,9 @@
           "summary": "Summary"
         }
       }
+    },
+    "templateLayout": {
+      "header": "Template"
     }
   }
 }

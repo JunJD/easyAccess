@@ -35,6 +35,9 @@
           "summary": "概览"
         }
       }
+    },
+    "templateLayout": {
+      "header": "模板"
     }
   }
 }
