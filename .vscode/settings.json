@@ -1,11 +1,13 @@
 {
     "cSpell.words": [
+        "AISTT",
         "Artboard",
         "Azurill",
         "cacheable",
         "cellstarts",
         "clsx",
         "copilotkit",
+        "dataavailable",
         "deepmerge",
         "devkit",
         "dexie",
@@ -21,6 +23,7 @@
         "interactjs",
         "Kanban",
         "newlist",
+        "nyquist",
         "Outdent",
         "paralleldrive",
         "prosemirror",
@@ -30,6 +33,8 @@
         "tiptap",
         "toploader",
         "usehooks",
+        "wavtools",
+        "worklets",
         "zustand"
     ]
 }

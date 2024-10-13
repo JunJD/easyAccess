@@ -8,3 +8,5 @@ export * from './lib/counterId';
 export * from './lib/types';
 export * from './lib/string';
 export * from './lib/number';
+export * from './lib/time';
+export * from './lib/file';
